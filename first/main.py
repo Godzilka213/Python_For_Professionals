@@ -333,24 +333,43 @@
 #             data.append(line)
 #         # Получаем список списков ^_^ в отсортированном виде, как требуется по расширению и название по алфавиту
 #         data = sorted(data, key=lambda x: (x[0].split('.')[1], x[0]))
-#
+#         # Создаем словари с именами файлов и их размерами
 #         name = {}
 #         mass = {}
-#         r = []
-#
-#         print(data)
 #         for i in range(len(data)):
 #             name.setdefault(data[i][0].split('.')[1], []).append(data[i][0])
-#             mass.setdefault(data[i][0].split('.')[1], []).append([data[i][1], data[i][2]])
+#             mass.setdefault(data[i][0].split('.')[1], []).append([int(data[i][1]), data[i][2]])
+#         # Приводим размеры файлов в байты и получаем максимальную размерность файлов от общего размера
+#         size = {'B': 1,
+#                 'KB': 1024,
+#                 'MB': 1024 * 1024,
+#                 'GB': 1024 * 1024 * 1024,
+#                 }
+#         summary = 0
+#         result_size = []
+#         for k, v in mass.items():
+#             for i in v:
+#                 summary += i[0] * size[i[1]]
+#             if summary < 1024:
+#                 result_size.append([summary, 'B'])
+#             elif summary < 1024 * 1024:
+#                 result_size.append([summary / 1024, 'KB'])
+#             elif summary < 1024 * 1024 * 1024:
+#                 result_size.append([summary / 1024 / 1024, 'MB'])
+#             else:
+#                 result_size.append([summary / 1024 / 1024 / 1024, 'GB'])
+#             summary = 0
 #
+#         # Вывод
+#         j = 0
 #         for k, v in name.items():
-#             # if v =
 #             print(*v, sep='\n')
-#         print(mass)
+#             print('----------')
+#             print(f'Summary: {round(result_size[j][0])} {result_size[j][1]}', end='\n\n')
+#             j += 1
 #
 #
 # file()
-
 
 # КВАРТАЛЫ
 
@@ -754,7 +773,7 @@
 
 
 # КОЛИЧЕСТВО ВОСКРЕСЕНИЙ В ГОДУ
-
+#
 # from datetime import datetime
 #
 #
@@ -765,6 +784,3 @@
 #
 #
 # print(num_of_sundays(2000))
-
-
-
