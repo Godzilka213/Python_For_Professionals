@@ -7,7 +7,6 @@
 #
 # print(hide_card(card))
 
-
 # ВЫВОДИМ ВСЕ ЭЛЕМЕНТЫ СОВПАДАЮЩИЕ С ЧЕТНОСТЬЮ ПЕРВОГО
 
 # def same_parity(args):
@@ -784,3 +783,338 @@
 #
 #
 # print(num_of_sundays(2000))
+
+
+# ПРОДУКТИВНОСТЬ
+
+# from datetime import datetime, timedelta
+#
+# pattern = '%d.%m.%Y'
+# start = datetime.strptime(input(), pattern)
+#
+# for i in range(1, 11):
+#     print(start.strftime(pattern))
+#     start += timedelta(days=1 + i)
+
+
+# СОСЕДНИЕ ДАТЫ
+
+# from datetime import datetime
+#
+# pattern = '%d.%m.%Y'
+#
+# dates = [datetime.strptime(i, pattern) for i in input().split()]
+# print([abs(dates[i] - dates[i + 1]).days for i in range(len(dates) - 1)])
+
+
+# СПИСОК ВСЕХ ДАТ
+
+# from datetime import datetime
+#
+#
+# def fill_up_missing_dates(lst):
+#     lst = list(map(lambda x: datetime.strptime(x, '%d.%m.%Y').toordinal(), lst))
+#     min_data = min(lst)
+#     max_data = max(lst)
+#     return [datetime.fromordinal(i).strftime('%d.%m.%Y') for i in range(min_data, max_data + 1)]
+#
+#
+# dates = ['01.11.2021', '07.11.2021', '04.11.2021', '03.11.2021']
+#
+# print(fill_up_missing_dates(dates))
+
+
+# РАСПИСАНИЕ
+
+# from datetime import datetime, timedelta
+#
+# start = datetime.strptime(input(), '%H:%M')
+# finish = datetime.strptime(input(), '%H:%M')
+#
+# while (start + timedelta(minutes=45)) <= finish:
+#     print(f"{start.strftime('%H:%M')} - {(start + timedelta(minutes=45)).strftime('%H:%M')}")
+#     start = start + timedelta(minutes=55)
+
+
+# import time
+#
+# for i in [0.7, 0.5, 1.0, 2.5, 3.3]:
+#     print(f'Waiting for {i} seconds')
+#     time.sleep(i)
+# print('The end')
+
+
+# ОБЩЕЕ ВРЕМЯ
+
+# from datetime import datetime
+# from functools import reduce
+#
+# data = [('07:14', '08:46'),
+#         ('09:01', '09:37'),
+#         ('10:00', '11:43'),
+#         ('12:13', '13:49'),
+#         ('15:00', '15:19'),
+#         ('15:58', '17:24'),
+#         ('17:57', '19:21'),
+#         ('19:30', '19:59')]
+#
+# data_time = list(map(lambda x: (datetime.strptime(x[1], '%H:%M')) - (datetime.strptime(x[0], '%H:%M')), data))
+# data_time = reduce(lambda x, y: x + y, data_time)
+#
+# print(data_time.seconds // 60)
+
+
+# КОЛИЧЕСТВО ДНЕЙ ВЫПАВШИХ НА 13Е ЧИСЛО
+
+# from datetime import datetime
+#
+# pattern = '%d.%m.%Y'
+# start = datetime.strptime('01.01.0001', pattern).toordinal()
+# finish = datetime.strptime('31.12.9999', pattern).toordinal()
+# my_dict = dict.fromkeys(range(7), 0)
+#
+# for i in range(start, finish + 1):
+#     day = datetime.fromordinal(i).strftime('%d')
+#     if int(day) == 13:
+#         week_day = datetime.fromordinal(i).weekday()
+#         my_dict[week_day] = my_dict.get(week_day) + 1
+#
+# print(*list(my_dict.values()), sep='\n')
+# OR
+# from datetime import date
+#
+# my_dict = dict.fromkeys((range(7)), 0)
+#
+# for i in range(1, 10_000):
+#     for j in range(1, 13):
+#         my_dict[date(i, j, 13).weekday()] = my_dict.get(date(i, j, 13).weekday()) + 1
+# print(*list(my_dict.values()), sep='\n')
+
+
+# ВРЕМЯ РАБОТЫ
+
+# from datetime import datetime, timedelta
+#
+# data = datetime.strptime(input(), '%d.%m.%Y %H:%M')
+# # Переводим дату в timedelta для возможности сравнить время
+# new = timedelta(hours=data.hour, minutes=data.minute)
+#
+# # Начало и конец работы в будни и выходные
+# work_day = [timedelta(hours=9), timedelta(hours=21)]
+# not_work_day = [timedelta(hours=10), timedelta(hours=18)]
+#
+# # Проверяем условие для будних дней в секундах
+# if work_day[0].seconds <= new.seconds < work_day[1].seconds and data.weekday() in [0, 1, 2, 3, 4]:
+#     # Получаем время в минутах
+#     before = (work_day[1].seconds - new.seconds) // 60
+#     print(before)
+#
+# # Проверяем условие для выходного дня в секундах
+# elif not_work_day[0].seconds <= new.seconds < not_work_day[1].seconds and data.weekday() in [5, 6]:
+#     # Получаем время в минутах
+#     before = (not_work_day[1].seconds - new.seconds) // 60
+#     print(before)
+#
+# # Не попали в рабочее время
+# else:
+#     print('Магазин не работает')
+#
+# print(data.weekday())
+# OR
+# from datetime import datetime
+#
+# date = datetime.strptime(input(), '%d.%m.%Y %H:%M')
+#
+# start, end = (date.replace(hour=i, minute=0) for i in ((9, 21), (10, 18))[date.weekday() > 4])
+# print(start)
+# if start <= date < end:
+#     print((end - date).seconds // 60)
+# else:
+#     print('Магазин не работает')
+
+
+# ДАТЫ НАЧИНАЯ С НЕЧЕТНОЙ, КАЖДАЯ ТРЕТЬЯ И НЕ ПОНЕДЕЛЬНИК, ЧЕТВЕРГ
+
+# from datetime import datetime, timedelta
+#
+# pattern = '%d.%m.%Y'
+# start, finish = datetime.strptime(input(), pattern), datetime.strptime(input(), pattern)
+# # Находим начальную дату вывода(нечетную)
+# while (start.day + start.month) % 2 == 0:
+#     start = start + timedelta(days=1)
+# # Выводим каждую третью дату если не понедельник, четверг
+# while start <= finish:
+#     if start.weekday() not in [0, 3]:
+#         print(start.strftime(pattern))
+#     start += timedelta(days=3)
+
+
+# СОТРУДНИКИ ОРГАНИЗАЦИИ, САМЫЕ СТАРЫЕ
+
+# from datetime import datetime
+#
+# pattern = '%d.%m.%Y'
+# lst = [input() for i in range(int(input()))]
+# my_dict = {}
+# # Создаем словарь дата(ключ): ФИО(значение)
+# for i in lst:
+#     # Создаем дату при помощи среза
+#     key_data = datetime.strptime(i[-10:], pattern)
+#     # Добавляем к датам ФИО
+#     my_dict[key_data] = my_dict.get(key_data, []) + [i[:-11]]
+#
+# # Получаем дату самого старого сотрудника
+# data = min(my_dict)
+# # Получаем количество сотрудников с одинаковой датой
+# length = len(my_dict[data])
+# # Выводим дату, ФИО если старый сотрудник один
+# if length == 1:
+#     print(data.strftime(pattern), *my_dict[data])
+# else:
+#     print(data.strftime(pattern), length)
+
+
+# СОТРУДНИКИ ОРГАНИЗАЦИИ, ДАТЫ ДНЕЙ РОЖДЕНИЯ
+#
+# from datetime import datetime
+#
+# pattern = '%d.%m.%Y'
+# lst = [input() for i in range(int(input()))]
+# my_dict = {}
+# # Создаем словарь дата(ключ): ФИО(значение)
+# for i in lst:
+#     # Создаем дату при помощи среза
+#     key_data = datetime.strptime(i[-10:], pattern)
+#     # Добавляем к датам ФИО
+#     my_dict[key_data] = my_dict.get(key_data, []) + [i[:-11]]
+# # Замудренный вывод
+# res = []
+# res_2 = []
+# for k, v in my_dict.items():
+#     if len(v) > 1:
+#         res.append(k)
+#     else:
+#         res_2.append(k)
+# res = sorted(res)
+# res_2 = sorted(res_2)
+# if len(res) > 0:
+#     for i in res:
+#         print(i.strftime(pattern))
+# else:
+#     for i in res_2:
+#         print(i.strftime(pattern))
+
+# СОТРУДНИКИ ОРГАНИЗАЦИИ, ПОСЛЕДНИЙ ДЕНЬ РОЖДЕНИ В ТЕЧЕНИИ 7 ДНЕЙ ОТ ТЕКУЩЕЙ ДАТЫ
+
+# from datetime import datetime, timedelta
+#
+# pattern = '%d.%m.%Y'
+# check = datetime.strptime(input(), pattern)
+# lst = [input() for i in range(int(input()))]
+# my_dict = {}
+# # Создаем словарь дата(ключ): ФИО(значение)
+# for i in lst:
+#     # Создаем дату при помощи среза
+#     key_data = datetime.strptime(i[-10:], pattern)
+#     # Приводим год ключа к году проверки или +1 для конца года
+#     if check < key_data.replace(year=check.year) <= check + timedelta(days=7) or \
+#         check < key_data.replace(year=check.year + 1) <= check + timedelta(days=7):
+#         # Добавляем к датам ФИО
+#         my_dict[key_data] = my_dict.get(key_data, []) + [i[:-11]]
+# if len(my_dict) > 0:
+#     birthday = max(my_dict.items())
+#     print(*birthday[1])
+# else:
+#     print('Дни рождения не планируются')
+
+
+# ЛОЖНЫЕ НОВОСТИ
+
+# from datetime import datetime
+
+# def choose_plural(num, words):
+#     suffixes = {
+#         1: 0, 2: 1, 3: 1, 4: 1, 5: 2, 6: 2, 7: 2, 8: 2, 9: 2, 0: 2,
+#     }
+#     if 11 <= num % 100 <= 14:
+#         return f'{num} {words[2]}'
+#     else:
+#         return f'{num} {words[suffixes[num % 10]]}'
+
+
+# ВРЕМЯ ВЫПОЛНЕНИЯ
+
+# import time
+#
+#
+# def add(a, b, c):
+#     time.sleep(3)
+#     return a + b + c
+#
+#
+# def calculate_it(add, *args):
+#     start = time.monotonic()
+#     s = add(*args)
+#     end = time.monotonic()
+#     res = end - start
+#     return s, res
+#
+#
+# print(calculate_it(add, 1, 2, 3))
+
+
+# СПИСОК ФУНКЦИЙ
+
+# import time
+#
+#
+# def slow(arg):
+#     time.sleep(3)
+#
+#
+# def fast(arg):
+#     time.sleep(1)
+#
+#
+# def get_the_fastest_func(funcs, arg):
+#     res = []
+#     for i in funcs:
+#         s = time.perf_counter()
+#         i(arg)
+#         f = time.perf_counter()
+#         res.append(f - s)
+#     huh = list(zip(funcs, res))
+#     huh = sorted(huh, key=lambda x: x[1])
+#     return huh[0][0]
+#
+#
+# funcs = [slow, fast]
+#
+# print(get_the_fastest_func(funcs, 0))
+
+
+# ВИСОКОСНЫЙ ГОД
+
+# from calendar import isleap
+#
+# data = [print(isleap(int(input()))) for i in range(int(input()))]
+
+
+# КАЛЕНДАРЬ НА МЕСЯЦ
+
+# import calendar
+#
+# month_ = list(calendar.month_abbr)
+# data = input()
+# print(calendar.month(int(data[:4]), month_.index(data[-3:])))
+
+
+# МЕСЯЦ
+
+# from datetime import datetime
+# from calendar import day_name
+#
+# data = datetime.strptime(input(), '%Y-%m-%d').weekday()
+# list_day = list(day_name)
+#
+# print(list_day[data])
