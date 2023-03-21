@@ -1031,7 +1031,14 @@
 # ЛОЖНЫЕ НОВОСТИ
 
 # from datetime import datetime
-
+#
+# days = ['день', 'дня', 'дней']
+# hours = ['час', 'часа', 'часов']
+# minutes = ['минута', 'минуты', 'минут']
+# txt = 'До выхода курса осталось:'
+# main_data = datetime.strptime('08.11.2022 12:00', '%d.%m.%Y %H:%M')
+#
+#
 # def choose_plural(num, words):
 #     suffixes = {
 #         1: 0, 2: 1, 3: 1, 4: 1, 5: 2, 6: 2, 7: 2, 8: 2, 9: 2, 0: 2,
@@ -1040,7 +1047,30 @@
 #         return f'{num} {words[2]}'
 #     else:
 #         return f'{num} {words[suffixes[num % 10]]}'
-
+#
+#
+# data = datetime.strptime(input(), '%d.%m.%Y %H:%M')
+# res = main_data - data
+# d = res.days
+# h = res.seconds // 3600
+# m = int(res.seconds / 60 % 60)
+#
+# if main_data <= data:
+#     print('Курс уже вышел!')
+#
+# # Если остались часы и минуты
+# elif d < 1:
+#     if h == 0:
+#         print(f'{txt} {choose_plural(m, minutes)}')
+#     elif m == 0:
+#         print(f'{txt} {choose_plural(h, hours)}')
+#     else:
+#         print(f'{txt} {choose_plural(h, hours)}', 'и', f'{choose_plural(m, minutes)}')
+# else:
+#     if h != 0:
+#         print(f'{txt} {choose_plural(d, days)}', 'и', f'{choose_plural(h, hours)}')
+#     else:
+#         print(f'{txt} {choose_plural(d, days)}')
 
 # ВРЕМЯ ВЫПОЛНЕНИЯ
 
@@ -1118,3 +1148,75 @@
 # list_day = list(day_name)
 #
 # print(list_day[data])
+
+
+# КОЛИЧЕСТВО ДНЕЙ В МЕСЯЦЕ
+
+# import calendar
+#
+# y, m = input().split()
+# print(calendar.monthrange(int(y), int(m))[1])
+
+
+# КОЛИЧЕСТВО ДНЕЙ В МЕСЯЦЕ
+
+# import calendar
+#
+# year, m = input().split()
+# m_index = list(calendar.month_name).index(m)
+# print(calendar.monthrange(int(year), m_index)[1])
+
+
+# ОТСОРТИРОВАННЫЙ СПИСОК ДАТ
+
+# from datetime import date
+# import calendar
+#
+#
+# def get_days_in_month(y, m):
+#     m_index = list(calendar.month_name).index(m)
+#     m_range = int(calendar.monthrange(y, m_index)[1])
+#     res = []
+#     for i in range(1, m_range + 1):
+#         res.append(date(year=y, month=m_index, day=i))
+#     return res
+#
+#
+# print(get_days_in_month(2021, 'December'))
+
+
+# СПИСОК ГОДОВ ВЫПАДАЮЩИХ НА ПОНЕДЕЛЬНИК
+
+# from datetime import date
+# import calendar
+#
+#
+# def get_all_mondays(yr):
+#     res = []
+#     for i in range(1, 13):
+#         days = calendar.monthrange(yr, i)[1]
+#         for j in range(1, days + 1):
+#             day = date(year=yr, month=i, day=j)
+#             if day.weekday() == 0:
+#                 res.append(date(year=yr, month=i, day=j))
+#     return res
+#
+# print(get_all_mondays(2021))
+
+
+# ТРЕТИЙ ЧЕТВЕРГ МЕСЯЦА
+
+# import calendar
+# from datetime import date
+#
+# year = int(input())
+# counter = 0
+# for month in range(1, 13):
+#     for week in calendar.monthcalendar(year, month):
+#
+#         if week[3]:
+#             counter += 1
+#             if counter == 3:
+#                 print(date(year=year, month=month, day=week[3]).strftime('%d.%m.%Y'))
+#                 counter = 0
+#                 break
