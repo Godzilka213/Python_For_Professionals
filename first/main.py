@@ -1220,3 +1220,411 @@
 #                 print(date(year=year, month=month, day=week[3]).strftime('%d.%m.%Y'))
 #                 counter = 0
 #                 break
+
+
+# ОБРАТНЫЙ ПОРЯДОК
+
+# import sys
+#
+# data = list(map(str.strip, sys.stdin))
+#
+# for line in data:
+#     print(line[::-1])
+
+
+# РАЗМАХ ДАННЫХ
+
+# import sys
+# from datetime import datetime
+#
+# data = []
+# for i in sys.stdin:
+#     data.append(datetime.fromisoformat(i.rstrip('\n')))
+# print(max(data).toordinal() - min(data).toordinal())
+
+
+# ЛЕММА О ТРЕХ НОСКАХ
+
+# import sys
+#
+# name = ['Анри', 'Дима']
+# numbers = list(reversed([int(i) for i in sys.stdin]))
+#
+# if numbers[0] % 2 == 0:
+#     print(name[(len(numbers) - 1) % 2])
+#
+# else:
+#     print(name[len(numbers) % 2])
+
+
+# УРОК СТАТИСТИКИ
+
+# import sys
+#
+# high = list(map(int, sys.stdin))
+#
+# if len(high) > 0:
+#     middle = sum(high) / len(high)
+#     print(f'Рост самого низкого ученика: {min(high)}',
+#           f'Рост самого высокого ученика: {max(high)}', f'Средний рост: {middle}', sep='\n')
+# else:
+#     print('нет учеников')
+
+
+# КОММЕНТАТОР
+
+# import sys
+#
+# lst = list(map(str.strip, sys.stdin))
+# counter = sum([1 for i in lst if i.startswith('#')])
+#
+# print(counter)
+
+
+# БЕЗ КОММЕНТАРИЕВ
+
+# import sys
+#
+# lst = list(map(str.rstrip, sys.stdin))
+# res = [print(i) for i in lst if not i.strip().startswith('#')]
+# OR
+# for i in lst:
+#     if i.strip().startswith('#'):
+#         continue
+#     print(i)
+
+
+# ПАНОРАМНОЕ АГЕНСТВО
+
+# import sys
+# SECOND TRY
+# # Считываем потоковый ввод данных, убираем переносы и создаем список по ' / '
+# lst = [i.strip().split(' / ') for i in sys.stdin]
+# # Фильтруем по категориям в lst не доходя до самой категории, чтобы не словить ошибку
+# res = filter(lambda x: x[1] == lst[-1][0], lst[:-1])
+# # Сортируем по степени достоверности И по алфавиту
+# res_sorted = sorted(res, key=lambda x: (float(x[-1]), x))
+# # Выводим новости
+# print_var = [print(i[0]) for i in res_sorted]
+# OR
+# from sys import stdin
+#
+# news = [i.strip().split(' / ') for i in stdin]
+# filtered = filter(lambda x: x[1] == news[-1][0], news[:-1])
+#
+# print(*(i[0] for i in sorted(filtered, key=lambda x: (float(x[2]), x[0]))), sep='\n')
+
+
+# ЭТО ТОЧНО PYTHON ?
+
+# from datetime import datetime
+# import sys
+#
+# pattern = '%d.%m.%Y'
+# data = [datetime.strptime(i.strip(), pattern) for i in sys.stdin]
+# set_data = set(data)
+#
+# if sorted(set_data) == data:
+#     print('ASC')
+# elif sorted(set_data, reverse=True) == data:
+#     print('DESC')
+# else:
+#     print('MIX')
+
+
+# ГУРУ ПРОГРЕССИЙ
+
+# import sys
+#
+# numbers = [int(i) for i in sys.stdin]
+# ap = 1
+# gp = 1
+# for i in range(len(numbers) - 1):
+#     if numbers[i + 1] - numbers[i] == 1:
+#         ap += 1
+#     elif numbers[i + 1] // numbers[i] == 2:
+#         gp += 1
+# if ap == len(numbers):
+#     print('Арифметическая прогрессия')
+# elif gp == len(numbers):
+#     print('Геометрическая прогрессия')
+# else:
+#     print('Не прогрессия')
+
+
+# СОЗДАЕМ ФАЙЛ
+
+# import csv
+#
+# with open('writing_test.csv', 'w', encoding='utf-8') as csv_file:
+#     # создаем writer объект и указываем названия столбцов
+#     writer = csv.DictWriter(csv_file, fieldnames=['first_col', 'second_col'])
+#     # записываем первую строку с названиями столбцов
+#     writer.writeheader()
+#     # записываем строку с данными
+#     writer.writerow({'first_col': 'value1', 'second_col': 'value2'})
+#     s.writerow
+
+
+# СКИДКИ
+
+# import csv
+#
+# with open('sales.csv', 'r', encoding='utf-8') as file:
+#     # Считываем файл и создаем словарь
+#     rows = csv.DictReader(file, delimiter=';', quotechar='"')
+#     # Перебираем и сравниваем цены
+#     for row in rows:
+#         if int(row['old_price']) > int(row['new_price']):
+#             print(row['name'])
+
+
+# СРЕДНЯЯ ЗАРПАЛАТА
+
+# import csv
+#
+# with open('salary_data.csv', 'r', encoding='utf-8') as file:
+#     # Считываем файл в виде словарей
+#     rows = csv.DictReader(file, delimiter=';')
+#     # Общая сумма зарплат
+#     amount = {}
+#     # Количество работников
+#     count_name = {}
+#     # Получаем численные значения
+#     for row in rows:
+#         amount[row['company_name']] = amount.get(row['company_name'], 0) + int(row['salary'])
+#         count_name[row['company_name']] = count_name.get(row['company_name'], 0) + 1
+#     # Список компаний с среднеарифметическими значениями зарплат
+#     res = {}
+#     for k, v in amount.items():
+#         res[k] = res.get(k, 0) + amount[k] // count_name[k]
+#     # Выводим компании в отсортированном виде по возрастанию зарплат
+#     for name in sorted(res, key=lambda x: res[x]):
+#         print(name)
+
+
+# СОРТИРОВКА ПО СТОЛБЦУ
+
+# import csv
+#
+# col = int(input())
+# with open('deniro.csv', 'r', encoding='utf-8') as file:
+#     # Создаем итератор при помощи .reader()
+#     rows = csv.reader(file)
+#     # Печатаем строки сортируя в lambda
+#     for row in sorted(rows, key=lambda x: int(x[col - 1]) if col != 1 else x[col - 1]):
+#         print(*row, sep=',')
+
+
+# ФУНКЦИЯ csv_columns()
+
+# import csv
+#
+#
+# def csv_columns(file_name):
+#     with open(file_name, 'r', encoding='utf-8') as file:
+#         rows = csv.DictReader(file)
+#         my_dict = {}
+#
+#         for row in rows:
+#             for k in list(row.keys()):
+#                 my_dict[k] = my_dict.get(k, []) + [row[k]]
+#         return my_dict
+#
+#
+# print(csv_columns('exam.csv'))
+# OR
+# import csv
+#
+# def csv_columns(filename):
+#
+#     with open(filename, encoding="utf-8") as file_in:
+#         rows = list(csv.reader(file_in))
+#         return {key: value for key, *value in zip(*rows)}
+
+
+# ПОПУЛЯРНЫЕ ДОМЕНЫ
+
+# import csv
+#
+# with open('data.csv', 'r', encoding='utf-8') as file, open('domain_usage.csv', 'w', encoding='utf-8') as new_file:
+#     rows = csv.reader(file)
+#     # Убираем заголовок
+#     a = next(rows)
+#     # Получаем список с доменами
+#     data = [row[2].split('@')[1] for row in rows]
+#     # Создаем словарь и считаем количество доменов
+#     my_dict = {}
+#     for k in data:
+#         my_dict[k] = my_dict.get(k, 0) + 1
+#     # Сортируем словарь по количеству доменов и алфавиту
+#     my_dict = {k: v for k, v in sorted(my_dict.items(), key=lambda item: (item[1], item[0]))}
+#     # Записали заголовок
+#     new_file.write('domain,count\n')
+#     # Записываем значения отсортированного словаря
+#     for k, v in my_dict.items():
+#         new_file.write(f'{k},{str(v)}\n')
+# OR
+# import csv
+#
+# with open('data.csv', encoding='utf-8') as csv_file:
+#     rows = csv.DictReader(csv_file, delimiter=',')
+#     dct = {}
+#     for row in rows:
+#         domain = row['email'].split('@')[-1]
+#         dct[domain] = dct.get(domain, 0) + 1
+#
+# with open('domain_usage.csv', 'w', encoding='utf-8', newline='') as file:
+#     writer = csv.writer(file, delimiter=',')
+#     writer.writerow(['domain', 'count'])
+#     for row in sorted(dct.items(), key=lambda x: (x[1], x[0])):
+#         writer.writerow(row)
+
+
+# Wi-Fi МОСКВЫ
+
+# import csv
+#
+# with open('wifi.csv', 'r', encoding='utf-8') as file:
+#     # Получаем итератор
+#     rows = csv.DictReader(file, delimiter=';')
+#     res = {}
+#     # Наполняем итоговый словарь
+#     for row in rows:
+#         res[row['district']] = res.get(row['district'], 0) + int(row['number_of_access_points'])
+#     # Сортируем и выводим районы с количеством пользователей
+#     for k, v in sorted(res.items(), key=lambda x: (int(-x[1]), x[0])):
+#         print(f'{k}: {v}')
+
+
+# ПОСЛЕДНИЙ ДЕНЬ НА ТИТАНИКЕ
+
+# import csv
+#
+# with open('titanic.csv', 'r', encoding='utf-8') as file:
+#     rows = csv.DictReader(file, delimiter=';')
+#     # Получаем всех выживших с возрастом менее 18 лет
+#     res = filter(lambda x: int(x['survived']) == 1 and float(x['age']) < 18, rows)
+#     # Сортируем
+#     res_sort = sorted(res, key=lambda x: x['sex'] == 'female' and float(x['age']) < 18)
+#     for row in res_sort:
+#         print(row['name'])
+
+
+# ЛОГ-ФАЙЛ
+
+# from datetime import datetime
+# import csv
+#
+# with open('name_log.csv', 'r', encoding='utf-8') as file:
+#     rows = csv.DictReader(file)
+#     data = {}
+# # Создаем словарь по емэйл: все изменения ника, если встретится новое имя, произойдет перезапись значения
+#     for row in sorted(rows, key=lambda x: datetime.strptime(x['dtime'], '%d/%m/%Y %H:%M')):
+#         data[row['email']] = [row['username'], row['email'], row['dtime']]
+# # Записываем заголовки, сортируем словарь по емэйлу и записываем
+# with open('new_name_log.csv', 'w', encoding='utf-8', newline='') as new_file:
+#     writer = csv.writer(new_file, )
+#     writer.writerow(['username', 'email', 'dtime'])
+#     for i in sorted(data.items(), key=lambda x: x[1][1]):
+#         writer.writerow(i[1])
+# OR
+# import csv
+# from datetime import datetime
+#
+# with open('name_log.csv', encoding='UTF-8') as f:
+# 	header, *rows = csv.reader(f)
+#
+# d = {i[1]:i for i in sorted(rows, key=lambda x: datetime.strptime(x[2], '%d/%m/%Y %H:%M'))}
+#
+# with open('new_name_log.csv', 'w', encoding='UTF-8', newline='') as f:
+# 	w = csv.writer(f)
+# 	w.writerow(header)
+# 	w.writerows(sorted(d.values(), key=lambda x: x[1]))
+
+
+# ПРОЩЕ ЧЕМ КАЖЕТСЯ
+
+# import csv
+#
+#
+# def condense_csv(file, id_name):
+#     with open(file, 'r', encoding='utf-8') as data:
+#         rows = csv.reader(data)
+#         objects = {}
+#         for row in rows:
+#             obj_id = row[0]
+#             name = row[1]
+#             value = row[2]
+#             if obj_id not in objects:
+#                 objects[obj_id] = {}
+#             objects[obj_id][name] = value
+#
+#     with open('condensed.csv', 'w', encoding='utf-8', newline='') as new_data:
+#         writer = csv.writer(new_data)
+#         writer.writerow([id_name] + list(objects[next(iter(objects))].keys()))
+#         for name, props in objects.items():
+#             writer.writerow([name] + list(props.values()))
+#
+#
+# condense_csv('data_csv.csv', 'ID')
+# OR
+# import csv
+#
+#
+# def condense_csv(filename, id_name):
+#     with open(filename, encoding='utf-8') as file:
+#         objects = {}
+#         # Создаем словарь со словарями
+#         for obj, attr, value in csv.reader(file):
+#             if obj not in objects:
+#                 objects[obj] = {id_name: obj}
+#             objects[obj][attr] = value
+#     # Записываем словари
+#     with open('condensed.csv', 'w', encoding='utf-8') as file:
+#         writer = csv.DictWriter(file, fieldnames=objects[obj])
+#         writer.writeheader()
+#         writer.writerows(objects.values())
+#
+#
+# condense_csv('data_csv.csv', 'id')
+
+
+# ВОЗРАСТАНИЕ КЛАССОВ 🌶️
+
+# import csv
+#
+# with open('student_counts.csv', 'r', encoding='utf-8') as file, \
+#     open('sorted_student_counts.csv', 'w', encoding='utf-8') as new_file:
+#     rows = csv.DictReader(file)
+#     title = rows.fieldnames
+# # Сортируем заголовок -> 1-А, 1-Б, 2-А...
+#     title_sort = sorted(title[1:], key=lambda x: (int(x.split('-')[0]), x.split('-')[1]))
+# # Вставялем 'year' в начало т.к. при сортировки его не учитывали
+#     title_sort.insert(0, title[0])
+#     res = {}
+#
+#     writer = csv.DictWriter(new_file, fieldnames=title_sort)
+# # Записываем заголовок
+#     writer.writeheader()
+# # Записываем ключи из отсортированного заголовка и записываем значение по этим ключам из общего файла
+#     for i in rows:
+#         for j in title_sort:
+#             res[j] = i[j]
+#         writer.writerow(res)
+
+
+# ГОЛОДНЫЙ СТУДЕНТ 🌶️
+
+# import csv
+#
+# with open('prices.csv', 'r', encoding='utf-8') as file:
+#     rows = list(csv.DictReader(file, delimiter=';'))
+#     shop = {}
+#     # Добавляем название магазина и самый дешевый товар
+#     for row in rows:
+#         shop[row['Магазин']] = sorted(list(row.items())[1:], key=lambda x: int(x[1]))[0]
+#     # Выбираем из данных предложений самый дешевый товар, самый меньший в лексинографическом порядке
+#     buy = sorted(shop.items(), key=lambda x: (int(x[1][1]), x[1][0], x[0]))[0]
+#     # Выводим название магазина и цену
+#     print(f'{buy[1][0]}: {buy[0]}')
