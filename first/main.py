@@ -6,6 +6,7 @@
 # card = '905 678123 45612 56'
 #
 # print(hide_card(card))
+# import json
 
 # ВЫВОДИМ ВСЕ ЭЛЕМЕНТЫ СОВПАДАЮЩИЕ С ЧЕТНОСТЬЮ ПЕРВОГО
 
@@ -1519,7 +1520,7 @@
 # with open('name_log.csv', 'r', encoding='utf-8') as file:
 #     rows = csv.DictReader(file)
 #     data = {}
-# # Создаем словарь по емэйл: все изменения ника, если встретится новое имя, произойдет перезапись значения
+#     # Создаем словарь по емэйл: все изменения ника, если встретится новое имя, произойдет перезапись значения
 #     for row in sorted(rows, key=lambda x: datetime.strptime(x['dtime'], '%d/%m/%Y %H:%M')):
 #         data[row['email']] = [row['username'], row['email'], row['dtime']]
 # # Записываем заголовки, сортируем словарь по емэйлу и записываем
@@ -1543,7 +1544,7 @@
 # 	w.writerows(sorted(d.values(), key=lambda x: x[1]))
 
 
-# ПРОЩЕ ЧЕМ КАЖЕТСЯ
+# ПРОЩЕ ЧЕМ КАЖЕТСЯ 🌶️
 
 # import csv
 #
@@ -1628,3 +1629,330 @@
 #     buy = sorted(shop.items(), key=lambda x: (int(x[1][1]), x[1][0], x[0]))[0]
 #     # Выводим название магазина и цену
 #     print(f'{buy[1][0]}: {buy[0]}')
+
+
+# JSON
+
+# import json
+#
+# countries = {'Monaco': 'Monaco', 'Iceland': 'Reykjavik', 'Kenya': 'Nairobi', 'Kazakhstan': 'Nur-Sultan',
+#              'Mali': 'Bamako', 'Colombia': 'Bogota', 'Finland': 'Helsinki', 'Costa Rica': 'San Jose',
+#              'Cuba': 'Havana', 'France': 'Paris', 'Gabon': 'Libreville', 'Liberia': 'Monrovia',
+#              'Angola': 'Luanda', 'India': 'New Delhi', 'Canada': 'Ottawa', 'Australia': 'Canberra'}
+# print(json.dumps(countries, indent='   ', sort_keys=True, separators=(',', ' - ')))
+
+
+# ЗАПИСЬ JSON
+
+# import json
+#
+# club1 = {"name": "FC Byern Munchen", "country": "Germany", "founded": 1900,
+#          "trainer": "Julian Nagelsmann", "goalkeeper": "M. Neuer", "league_position": 1}
+#
+# club2 = {"name": "FC Barcelona", "country": "Spain", "founded": 1899,
+#          "trainer": "Xavier Creus", "goalkeeper": "M. Ter Stegen", "league_position": 7}
+#
+# club3 = {"name": "FC Manchester United", "country": "England", "founded": 1878,
+#          "trainer": "Michael Carrick", "goalkeeper": "D. De Gea", "league_position": 8}
+# my_list = [club1, club2, club3]
+# with open('data.json', 'w', encoding='utf-8') as file:
+#     json.dump(my_list, file, indent=3)
+
+
+# КИРИЛЛИЧЕСКИЕ СИМВОЛЫ
+
+# import json
+#
+# specs = {
+#     'Модель': 'AMD Ryzen 5 5600G',
+#     'Год релиза': 2021,
+#     'Сокет': 'AM4',
+#     'Техпроцесс': '7 нм',
+#     'Ядро': 'Cezanne',
+#     'Объем кэша L2': '3 МБ',
+#     'Объем кэша L3': '16 МБ',
+#     'Базовая частота': '3900 МГц'
+# }
+#
+# specs_json = json.dumps(specs, indent=3, ensure_ascii=False)
+#
+# print(specs_json)
+
+
+# ФУНКЦИЯ is_correct_json()
+
+# import json
+#
+#
+# def is_correct_json(data):
+#     try:
+#         if json.loads(data):
+#             return True
+#     except json.decoder.JSONDecodeError:
+#         return False
+
+
+# print(is_correct_json('number = 17'))
+
+
+# ЭЛЕМЕНТЫ JSON
+
+# import sys
+# import json
+#
+# data = json.loads(sys.stdin.read())
+# for k, v in data.items():
+#     if type(v) is list:
+#         print(k, end=': ')
+#         print(*v, sep=', ')
+#     else:
+#         print(f'{k}: {v}')
+
+
+# РАЗНЫЕ ТИПЫ
+
+# import json
+#
+# with open('data.json', 'r', encoding='utf-8') as file:
+#     data = json.load(file)
+#     result = []
+#
+#     for item in data:
+#         if type(item) == bool:
+#             result.append(not item)
+#         elif type(item) == str:
+#             result.append(item + '!')
+#         elif type(item) == int:
+#             result.append(item + 1)
+#         elif type(item) == list:
+#             result.append(item * 2)
+#         elif type(item) == dict:
+#             item["newkey"] = None
+#             result.append(item)
+#
+# with open('updated_data.json', 'w', encoding='utf-8') as new_file:
+#     json.dump(result, new_file, indent=3)
+
+
+# ОБЪЕДИНЕНИЕ ОБЪЕКТОВ
+
+# import json
+#
+# with open('data1.json', 'r', encoding='utf-8') as first, \
+#     open('data2.json', 'r', encoding='utf-8') as second:
+#     first = json.load(first)
+#     second = json.load(second)
+#     res = first | second
+# with open('data_merge.json', 'w', encoding='utf-8') as new_file:
+#     json.dump(res, new_file, indent=3)
+
+
+# ВОССТАНОВЛЕНИЕ НЕДОСТАЮЩИХ КЛЮЧЕЙ
+
+# with open('people.json', 'r', encoding='utf-8') as file:
+#     # Считали джейсонину
+#     data = json.load(file)
+#     # Получили длины всех словарей
+#     len_dict = [len(i.keys()) for i in data]
+#     # Получили индекс самого длинного словаря
+#     index = len_dict.index(max(len_dict))
+#     # Получили сам словарь -> ЭТАЛОН
+#     max_dict = data[index]
+#     result = []
+#     # Пробегаемся по всем словарям из списка
+#     for i in data:
+#         # Пробегаемся по всем ключам из эталона и записываем эти ключ: None в случае отствутствия в i словаре
+#         for k in max_dict:
+#             i.setdefault(k, None)
+#         result.append(i)
+#
+# with open('updated_people.json', 'w', encoding='utf-8') as new_file:
+#     # Записываем список словарей в джейсонину
+#     json.dump(result, new_file, indent=3)
+# OR
+# import json
+#
+# with open('people.json', encoding='utf8') as fi, open('updated_people.json', 'w') as fo:
+#     people = json.load(fi)
+#     # Создаем словарь со всеми найденными ключами и задаем значение None
+#     d = {k: None for i in people for k in i.keys()}
+#     # Делаем update при помощи | и получаем изначальные значения из файла
+#     json.dump([d | i for i in people], fo)
+
+
+# Я ИСПОВЕДУЮ Python, А ТЫ ?
+
+# import json
+#
+# with open('countries.json', 'r', encoding='utf-8') as file:
+#     data = json.load(file)
+#     result = {}
+#     # Создаем ключ(религию): значение(список стран)
+#     for i in data:
+#         result.setdefault(i['religion'], []).append(i['country'])
+#
+# with open('religion.json', 'w', encoding='utf-8') as new_file:
+#     json.dump(result, new_file, indent=3)
+
+
+# СПОРТИВНЫЕ ПЛОЩАДКИ
+
+# import csv
+# import json
+#
+# with open('playgrounds.csv', 'r', encoding='utf-8') as file:
+#     rows = csv.reader(file, delimiter=';')
+#     next(rows)
+#     result = {}
+#
+#     for obj, area, region, adres in rows:
+#         # Создаем округа со словарями
+#         result.setdefault(area, {})
+#         # В округ добавляет словарь с регионом и списком адресов
+#         result[area].setdefault(region, []).append(adres)
+#
+# with open('addresses.json', 'w', encoding='utf-8') as new_file:
+#     json.dump(result, new_file, indent=3, ensure_ascii=False)
+
+
+# СТУДЕНТЫ КУРСА
+
+# import json
+# import csv
+#
+# with open('students.json', 'r', encoding='utf-8') as file:
+#     data = json.load(file)
+#     # Фильтруем исходный файл
+#     new_data = list(filter(lambda x: int(x['age']) >= 18 and int(x['progress']) >= 75, data))
+#     # Создаем словарь с нужным ключом и значением
+#     result = {i['name']: i['phone'] for i in new_data}
+#     # Сортируем ключи по алфавиту
+#     result = sorted(result.items(), key=lambda x: x[0])
+#
+# with open('data.csv', 'w', encoding='utf-8', newline='') as new_file:
+#     writer = csv.writer(new_file)
+#     # Записываем заголовок
+#     writer.writerow(['name', 'phone'])
+#     # Записываем имя и телефон
+#     for name, phone in result:
+#         writer.writerow([name, phone])
+
+
+# БАССЕЙНЫ
+
+# import json
+# from datetime import datetime
+#
+# with open('pools.json', 'r', encoding='utf-8') as file:
+#     data = json.load(file)
+#     # Фильтруем по времени, чтобы бассейн работал в момент времени 10:00-12:00
+#     data = filter(lambda x: datetime.strptime(x['WorkingHoursSummer']['Понедельник'].split('-')[0], '%H:%M').time() <=
+#                          datetime.strptime('10:00', '%H:%M').time()
+#                          and datetime.strptime(x['WorkingHoursSummer']['Понедельник'].split('-')[1], '%H:%M').time() >=
+#                          datetime.strptime('12:00', '%H:%M').time(), data)
+#     # Сортируем по длине и по ширине если встретился такой же длины
+#     data_sort = sorted(data, key=lambda x: (int(x['DimensionsSummer']['Length']),
+#                                             (int(x['DimensionsSummer']['Width']))), reverse=True)
+#     # Выводим самый длинный или самый длинный и широкий бассейн
+#     print(f'''{data_sort[0]["DimensionsSummer"]["Length"]}x{data_sort[0]["DimensionsSummer"]["Width"]}
+# {data_sort[0]["Address"]}''')
+
+
+# РЕЗУЛЬТАТЫ ЭКЗАМЕНА
+
+# import csv
+# import json
+# from datetime import datetime
+#
+#
+# with open('exam_results.csv', 'r', encoding='utf-8') as file:
+#     rows = csv.DictReader(file)
+#     next(rows)
+#     res = {}
+#     rows = sorted(rows, key=lambda x: datetime.strptime(x['date_and_time'], '%Y-%m-%d %H:%M:%S'))
+#
+#     for row in rows:
+#         res.setdefault((row['email'], row['name'], row['surname']), {}).setdefault(int(row['score']), []). \
+#             append(datetime.strptime(row['date_and_time'], '%Y-%m-%d %H:%M:%S'))
+#     new_list = []
+#     new = {}
+#     for k, v in res.items():
+#         max_key = max(v.keys())
+#         new['name'] = k[1]
+#         new['surname'] = k[2]
+#         new['best_score'] = max_key
+#         new['date_and_time'] = str(v[max_key][-1])
+#         new['email'] = k[0]
+#         new_list.append(new)
+#         new = {}
+#     new_list = sorted(new_list, key=lambda x: x['email'])
+#
+# with open('best_scores.json', 'w', encoding='utf-8') as new_file:
+#     json.dump(new_list, new_file, indent=3)
+# OR
+# import json, csv
+#
+# with open('exam_results.csv', encoding='utf8') as file:
+#     head, *rows = list(csv.reader(file, delimiter=','))
+#
+# rows.sort(key=lambda x: x[2])  # sort by score
+# rows.sort(key=lambda x: x[3])  # sort by time
+# rows.sort(key=lambda x: x[4])  # sort by email
+#
+# data = {}
+# for name, surname, score, date_and_time, email in rows:
+#     data[email] = {'name': name, 'surname': surname, 'best_score': int(score),
+#                    'date_and_time': date_and_time, 'email': email}
+#
+# with open('best_scores.json', 'w', encoding='utf8') as file:
+#     json.dump(list(data.values()), file, indent=3)
+
+
+# ОБЩЕСТВЕННОЕ ПИТАНИЕ-1
+
+# import json
+#
+#
+# with open('food_services.json', 'r', encoding='utf-8') as file:
+#     data = json.load(file)
+#     filter_data = filter(lambda x: x['IsNetObject'] == 'да', data)
+#     res = {}
+#     shop = {}
+#     for i in data:
+#         res[i['District']] = res.get(i['District'], 0) + 1
+#
+#     for j in filter_data:
+#         shop[j['OperatingCompany']] = shop.get(j['OperatingCompany'], 0) + 1
+#
+#     region_popular = max(res.items(), key=lambda x: x[1])
+#     shop_popular = max(shop.items(), key=lambda x: x[1])
+#     print(f'''{region_popular[0]}: {region_popular[1]}
+# {shop_popular[0]}: {shop_popular[1]}''')
+# OR
+# import json
+#
+# with open("food_services.json", "r", encoding="utf-8") as f:
+#     cafes = list(json.load(f))
+#     dst = [i["District"] for i in cafes]
+#     cmp = [i["OperatingCompany"] for i in cafes if i["OperatingCompany"]]
+#     mfd, mfc = max(set(dst), key=dst.count), max(set(cmp), key=cmp.count)
+#
+#     print(f"{mfd}: {dst.count(mfd)}\n{mfc}: {cmp.count(mfc)}")
+
+
+# ОБЩЕСТВЕННОЕ ПИТАНИЕ-2
+
+# import json
+#
+# # name, IsNetObject, OperatingCompany, TypeObject, AdmArea, District, Address, SeatsCount
+# with open('food_services.json', 'r', encoding='utf-8') as file:
+#     data = json.load(file)
+#     res = {}
+#     data = sorted(data, key=lambda x: x['SeatsCount'])
+#     for i in data:
+#         res.setdefault(i['TypeObject'], {})
+#         res[i['TypeObject']] = {i['Name']: i['SeatsCount']}
+#     res = sorted(res.items())
+#     for k, v in res:
+#         for i, j in v.items():
+#             print(f'{k}: {i}, {j}')
