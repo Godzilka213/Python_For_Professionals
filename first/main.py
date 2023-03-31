@@ -1847,16 +1847,16 @@
 #     data = json.load(file)
 #     # Фильтруем по времени, чтобы бассейн работал в момент времени 10:00-12:00
 #     data = filter(lambda x: datetime.strptime(x['WorkingHoursSummer']['Понедельник'].split('-')[0], '%H:%M').time() <=
-#                          datetime.strptime('10:00', '%H:%M').time()
-#                          and datetime.strptime(x['WorkingHoursSummer']['Понедельник'].split('-')[1], '%H:%M').time() >=
-#                          datetime.strptime('12:00', '%H:%M').time(), data)
+#                             datetime.strptime('10:00', '%H:%M').time()
+#                             and datetime.strptime(x['WorkingHoursSummer']['Понедельник'].split('-')[1],
+#                                                   '%H:%M').time() >=
+#                             datetime.strptime('12:00', '%H:%M').time(), data)
 #     # Сортируем по длине и по ширине если встретился такой же длины
 #     data_sort = sorted(data, key=lambda x: (int(x['DimensionsSummer']['Length']),
 #                                             (int(x['DimensionsSummer']['Width']))), reverse=True)
 #     # Выводим самый длинный или самый длинный и широкий бассейн
 #     print(f'''{data_sort[0]["DimensionsSummer"]["Length"]}x{data_sort[0]["DimensionsSummer"]["Width"]}
 # {data_sort[0]["Address"]}''')
-
 
 # РЕЗУЛЬТАТЫ ЭКЗАМЕНА
 
@@ -1956,3 +1956,234 @@
 #     for k, v in res:
 #         for i, j in v.items():
 #             print(f'{k}: {i}, {j}')
+
+
+# РАБОТА С ZIP ФАЙЛАМ
+
+# КОЛИЧЕСТВО ФАЙЛОВ
+
+# from zipfile import ZipFile
+#
+# with ZipFile('workbook.zip') as zip_file:
+#     info = zip_file.infolist()
+#     # /is_dir() проверяет это файл или папка
+#     print(len([i.filename for i in info if i.is_dir() is not True]))
+
+
+# ОБЪЕМ ФАЙЛОВ
+
+# from zipfile import ZipFile
+#
+# with ZipFile('workbook.zip') as zip_file:
+#     info = zip_file.infolist()
+#     size_bef = sum([i.file_size for i in info])
+#     size_aft = sum([i.compress_size for i in info])
+#     print(f'''Объем исходных файлов: {size_bef} байт(а)
+# Объем сжатых файлов: {size_aft} байт(а)''')
+
+
+# НАИЛУЧШИЙ ПОКАЗАТЕЛЬ
+
+# from zipfile import ZipFile
+#
+# with ZipFile('workbook.zip') as zip_file:
+#     info = zip_file.infolist()
+#     # Получили список названий файлов
+#     name = [i.filename for i in info if i.is_dir() is not True]
+#     # Получили список степень сжатия файлов
+#     size = [(i.compress_size / i.file_size) * 100 for i in info if i.is_dir() is not True]
+#     # Объединили списки
+#     all = list(zip(name, size))
+#     # Отсортировали по сжатию
+#     all = sorted(all, key=lambda x: x[1])
+#     # Выводим название файла
+#     print(list(all)[0][0].split('/')[1])
+# OR
+# from zipfile import ZipFile
+#
+# with ZipFile("workbook.zip") as zip_file:
+#     filelist = zip_file.infolist()
+#     t = ((f.filename, f.compress_size/f.file_size) for f in filelist
+#          if f.file_size != 0)
+#     print(min(t, key=lambda x: x[1])[0].split("/")[-1])
+
+
+# ИЗБРАННЫЕ
+
+# from zipfile import ZipFile
+# from datetime import datetime
+#
+# with ZipFile('workbook.zip') as zip_file:
+#     data = datetime.strptime('2021-11-30 14:22:00', '%Y-%m-%d %H:%M:%S')
+#     info = zip_file.infolist()
+#     favorit = [i.filename.split('/') for i in info if datetime(*i.date_time) >= data and i.is_dir() is not True]
+#     favorit_sort = [print(i[-1]) for i in sorted(favorit, key=lambda x: x[-1])]
+
+
+# ФОРМАТИРОВАННЫЙ ВЫВОД
+
+# from zipfile import ZipFile
+# from datetime import datetime
+#
+# with ZipFile('workbook.zip') as zip_file:
+#     info = zip_file.infolist()
+#     info = sorted(info, key=lambda x: x.filename.split('/')[-1])
+#     for i in info:
+#         if not i.is_dir():
+#             print(f'''{i.filename.split('/')[-1]}
+#   Дата модификации файла: {datetime(*i.date_time)}
+#   Объем исходного файла: {i.file_size} байт(а)
+#   Объем сжатого файла: {i.compress_size} байт(а)''')
+#             print()
+
+
+# СОЗДАНИЕ АРХИВА
+
+# from zipfile import ZipFile
+#
+# file_names = ['how to prove.pdf', 'fipi_demo_2022.pdf', 'Hollow Knight Silksong.exe',
+#               'code.jpeg', 'stepik.png', 'readme.txt', 'shopping_list.txt',
+#               'Alexandra Savior – Crying All the Time.mp3', 'homework.py', 'test.py']
+# Создаем архив
+# with ZipFile('files.zip', 'w') as zip_file:
+#     Записываем файлы
+#     file = [zip_file.write(i) for i in file_names]
+
+
+# ЗАПИСЬ В АРХИВ
+
+# from zipfile import ZipFile
+# import os.path
+#
+
+# file_names = ['how to prove.pdf', 'fipi_demo_2022.pdf', 'Hollow Knight Silksong.exe',
+#               'code.jpeg', 'stepik.png', 'readme.txt', 'shopping_list.txt',
+#               'Alexandra Savior – Crying All the Time.mp3', 'homework.py', 'test.py']
+# new_file_names = [i for i in file_names if os.path.getsize(i) <= 100]
+# with ZipFile('files.zip', 'a') as zip_file:
+#     file = [zip_file.write(i) for i in new_file_names]
+
+
+# ФУНКЦИЯ extract_this()
+
+# from zipfile import ZipFile
+#
+#
+# def extract_this(zip_name, *args):
+#     with ZipFile(zip_name) as zip_file:
+#         info = zip_file.infolist()
+#         info = [i.filename for i in info if not i.is_dir()]
+#         if args:
+#             for i in info:
+#                 if i.split('/')[-1] in args:
+#                     zip_file.extract(i)
+#         else:
+#             zip_file.extractall()
+#
+#
+# extract_this('workbook.zip', 'earth.jpg', 'exam.txt')
+# OR
+# from zipfile import ZipFile
+#
+#
+# def extract_this(zip_name: str, *args):
+#     if not args:
+#         args = None
+#     with ZipFile(zip_name) as zf:
+#         zf.extractall(members=args)
+
+
+# ОДИНОКАЯ ФУНКЦИЯ
+
+# import pickle
+# import sys
+#
+# file_name, *data = list(map(str.strip, sys.stdin))
+# with open(file_name, 'rb') as file:
+#     real_func = pickle.load(file)
+#
+# print(real_func(*data))
+
+
+# ТЫ НЕ ПРОЙДЕШЬ
+
+# import pickle
+#
+#
+# def filter_dump(name_pickl, some_list, type_data):
+#     with open(name_pickl, 'wb') as file:
+#         a = [i for i in some_list if type(i) == type_data]
+#         pickle.dump(a, file)
+#
+# filter_dump('numbers.pkl', [1, '2', 3, 4, '5'], int)
+
+
+# КОНТРОЛЬНАЯ СУММА
+
+# import pickle
+#
+# file, num = input(), int(input())
+# with open(file, 'rb') as data:
+#     info = pickle.load(data)
+#     change = [i for i in info if type(i) == int]
+#     check = sum(change) if type(info) == dict else max(change, default = 0)*min(change, default = 0)
+#     print(['Контрольные суммы не совпадают', 'Контрольные суммы совпадают'][num == check])
+
+
+# ШАХМАТЫ БЫЛИ ЛУЧШЕ🌶️
+
+# from zipfile import ZipFile
+# import json
+#
+#
+# def is_correct_json(data):
+#     try:
+#         a = json.loads(data)
+#         if a:
+#             return a
+#     except json.decoder.JSONDecodeError:
+#         return False
+#
+#
+# new_name = []
+# with ZipFile('data.zip') as zip_file:
+#     # Получаем пути к файлам
+#     name = [i.filename for i in zip_file.infolist() if i.is_dir() is not True]
+#     for i in name:
+#         # Попробуй прочитать файл и если он джейсонина, добавляем в список
+#         with zip_file.open(i) as file:
+#             try:
+#                 a = file.read().decode('utf-8')
+#                 func = is_correct_json(a)
+#                 if func:
+#                     new_name.append(func)
+#             except:
+#                 continue
+# # Фильтруем по футбольному клубу
+# new_name = filter(lambda x: x['team'] == 'Arsenal', new_name)
+# # Выводим имя и фамилию
+# out = [print(i['first_name'], i['last_name']) for i in
+#        sorted(new_name, key=lambda x: (x['first_name'], x['last_name']))]
+
+
+# СТРУКТУРА АРХИВА🌶️🌶️
+
+# from zipfile import ZipFile
+#
+#
+# def size_def(data):
+#     for unit in ('B', 'KB', 'MB', 'GB'):
+#         if data < 1024:
+#             return f'{round(data)} {unit}'
+#         data /= 1024
+#
+#
+# with ZipFile('desktop.zip') as zip_file:
+#     info = zip_file.infolist()
+#     for i in info:
+#         if i.is_dir():
+#             i = i.filename
+#             print(f"""{'  ' * (len(i[:len(i) - 1].split('/')) - 1)}{i.split('/')[-2]}""")
+#         else:
+#             print(f"""{'  ' * (len(i.filename.split('/')) - 1)}{i.filename.split('/')[-1]} {size_def(i.file_size)}""")
+
