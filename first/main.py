@@ -6,7 +6,6 @@
 # card = '905 678123 45612 56'
 #
 # print(hide_card(card))
-# import json
 
 # ВЫВОДИМ ВСЕ ЭЛЕМЕНТЫ СОВПАДАЮЩИЕ С ЧЕТНОСТЬЮ ПЕРВОГО
 
@@ -2186,4 +2185,726 @@
 #             print(f"""{'  ' * (len(i[:len(i) - 1].split('/')) - 1)}{i.split('/')[-2]}""")
 #         else:
 #             print(f"""{'  ' * (len(i.filename.split('/')) - 1)}{i.filename.split('/')[-1]} {size_def(i.file_size)}""")
+
+
+# Я И САМ СВОЕГО РОДА ПЕРЕВОДЧИК
+
+# import string
+#
+# alphabet = string.ascii_lowercase
+# txt = input()
+# translate = input().lower()
+# my_dict = {}
+# for i in range(len(txt)):
+#     my_dict[alphabet[i]] = txt[i]
+# print(my_dict)
+# answer = translate.maketrans(my_dict)
+# print(translate.translate(answer))
+# OR
+# from string import ascii_letters
+#
+# translator = str.maketrans(ascii_letters, input() * 2)
+#
+# print(input().translate(translator))
+# OR
+# from string import ascii_lowercase as lc
+#
+# tbl = str.maketrans(lc, input())
+# print(input().lower().translate(tbl))
+
+
+# 6.4.1 numedtuple()
+
+# from collections import namedtuple
+#
+# Fruit = namedtuple('Fruit', ('name', 'color', 'vitamins'))
+
+
+# 6.4.2
+
+# from collections import namedtuple
+#
+# Game = namedtuple('Game', 'name developer publisher')
+#
+# ExtendedGame = namedtuple('ExtendedGame', [*Game._fields, 'release_date', 'price'])
+
+
+# 6.4.3
+
+# from collections import namedtuple
+# import pickle
+#
+# Animal = namedtuple('Animal', ['name', 'family', 'sex', 'color'])
+#
+# with open('data.pkl', 'rb') as file:
+#     reader = pickle.load(file)
+# for i in reader:
+#     for j in zip(Animal._fields, i):
+#         print(f'{j[0]}: {j[1]}')
+#     print()
+
+
+# 6.4.4
+
+# from collections import namedtuple
+#
+# User = namedtuple('User', ['name', 'surname', 'email', 'plan'])
+#
+# users = [User('Mary', 'Griffin', 'sonnen@yahoo.com', 'Basic'),
+#          User('Brenda', 'Young', 'retoh@outlook.com', 'Silver'),
+#          User('Kathleen', 'Lyons', 'balchen@att.net', 'Gold'),
+#          User('Pamela', 'Hicks', 'corrada@sbcglobal.net', 'Silver'),
+#          User('William', 'Townsend', 'kosact@verizon.net', 'Gold'),
+#          User('Clayton', 'Morris', 'berserk@yahoo.com', 'Silver'),
+#          User('Dorothy', 'Dennis', 'sequin@live.com', 'Gold'),
+#          User('Tyler', 'Walker', 'noahb@comcast.net', 'Basic'),
+#          User('Joseph', 'Moore', 'ylchang@sbcglobal.net', 'Silver'),
+#          User('Kenneth', 'Richardson', 'tbusch@me.com', 'Bronze'),
+#          User('Stephanie', 'Bush', 'neuffer@live.com', 'Gold'),
+#          User('Gregory', 'Hughes', 'juliano@att.net', 'Basic'),
+#          User('Tracy', 'Wallace', 'sblack@me.com', 'Silver'),
+#          User('Russell', 'Smith', 'isaacson@comcast.net', 'Bronze'),
+#          User('Megan', 'Patterson', 'hoangle@outlook.com', 'Basic')]
+# Сортируем по подписке при помощи индекса
+# res = sorted(users, key=lambda x: (('Gold', 'Silver', 'Bronze', 'Basic').index(x.plan), x.email))
+# for i in res:
+#     print(f'''{i.name} {i.surname}
+#   Email: {i.email}
+#   Plan: {i.plan}'''
+#     print()
+
+
+# ВЫ КТО ТАКИЕ? Я ВАС НЕ ЗВАЛ
+
+# from datetime import datetime
+# import csv
+#
+# with open('meetings.csv', 'r', encoding='utf-8') as file:
+#     rows = csv.reader(file)
+#     title = next(file)
+#     for row in sorted(rows, key=lambda x: (datetime.strptime(f'{x[-2]}{x[-1]}', '%d.%m.%Y%H:%M'))):
+#         print(row[0], row[1])
+# OR
+# from collections import namedtuple
+# import csv
+# from datetime import datetime
+#
+# with open('meetings.csv', encoding='utf-8') as inf:
+#     rows = csv.reader(inf)
+#     title = next(rows)
+#     Friend = namedtuple('Friend', title)
+#     friends = [Friend(*row) for row in rows]
+# schedule = sorted(friends, key=lambda x: datetime.strptime(f'{x.meeting_date} {x.meeting_time}', '%d.%m.%Y %H:%M'))
+# print(*[f'{x.surname} {x.name}' for x in schedule], sep='\n')
+
+
+# way = 'DDUDUU'
+# ground_level = 0
+# amount = 0
+#
+# for i in way:
+#     if i == 'U':
+#         ground_level += 1
+#     else:
+#         ground_level -= 1
+#     if i == 'U' and ground_level == 0:
+#         amount += 1
+#
+# print(amount)
+
+
+# 6.5.1
+
+# from collections import defaultdict
+#
+# data = [('Books', 1343), ('Books', 1166), ('Merch', 616), ('Courses', 966), ('Merch', 1145), ('Courses', 1061),
+#         ('Books', 848), ('Courses', 964), ('Tutorials', 832), ('Merch', 642), ('Books', 815), ('Tutorials', 1041),
+#         ('Books', 1218), ('Tutorials', 880), ('Books', 1003), ('Merch', 951), ('Books', 920), ('Merch', 729),
+#         ('Tutorials', 977), ('Books', 656)]
+#
+# my_dict = defaultdict(int)
+# for k, v in data:
+#     my_dict[k] += v
+# for k, v in sorted(my_dict.items()):
+#     print(f'{k}: ${v}')
+
+
+# 6.5.2
+
+# from collections import defaultdict
+#
+# staff = [('Sales', 'Robert Barnes'), ('Developing', 'Thomas Porter'), ('Accounting', 'James Wilkins'),
+#          ('Sales', 'Connie Reid'), ('Accounting', 'Brenda Davis'), ('Developing', 'Miguel Norris'),
+#          ('Accounting', 'Linda Hudson'), ('Developing', 'Deborah George'), ('Developing', 'Nicole Watts'),
+#          ('Marketing', 'Billy Lloyd'), ('Sales', 'Charlotte Cox'), ('Marketing', 'Bernice Ramos'),
+#          ('Sales', 'Jose Taylor'), ('Sales', 'Katie Warner'), ('Accounting', 'Steven Diaz'),
+#          ('Accounting', 'Kimberly Reynolds'), ('Accounting', 'John Watts'), ('Accounting', 'Dale Houston'),
+#          ('Developing', 'Arlene Gibson'), ('Marketing', 'Joyce Lawrence'), ('Accounting', 'Rosemary Garcia'),
+#          ('Marketing', 'Ralph Morgan'), ('Marketing', 'Sam Davis'), ('Marketing', 'Gail Hill'),
+#          ('Accounting', 'Michelle Wright'), ('Accounting', 'Casey Jenkins'), ('Sales', 'Evelyn Martin'),
+#          ('Accounting', 'Aaron Ferguson'), ('Marketing', 'Andrew Clark'), ('Marketing', 'John Gonzalez'),
+#          ('Developing', 'Wilma Woods'), ('Sales', 'Marie Cooper'), ('Accounting', 'Kay Scott'),
+#          ('Sales', 'Gladys Taylor'), ('Accounting', 'Ann Bell'), ('Accounting', 'Craig Wood'),
+#          ('Accounting', 'Gloria Higgins'), ('Marketing', 'Mario Reynolds'), ('Marketing', 'Helen Taylor'),
+#          ('Marketing', 'Mary King'), ('Accounting', 'Jane Jackson'), ('Marketing', 'Carol Peters'),
+#          ('Sales', 'Alicia Mendoza'), ('Accounting', 'Edna Cunningham'), ('Developing', 'Joyce Rivera'),
+#          ('Sales', 'Joseph Lee'), ('Sales', 'John White'), ('Marketing', 'Charles Bailey'),
+#          ('Sales', 'Chester Fernandez'), ('Sales', 'John Washington')]
+# my_dict = defaultdict(int)
+# for k, v in staff:
+#     my_dict[k] += 1
+# for i in sorted(my_dict.items()):
+#     print(f'{i[0]}: {i[1]}')
+
+
+# 6.5.3
+
+# from collections import defaultdict
+#
+# staff_broken = [('Developing', 'Miguel Norris'), ('Sales', 'Connie Reid'), ('Sales', 'Joseph Lee'),
+#                 ('Marketing', 'Carol Peters'), ('Accounting', 'Linda Hudson'), ('Accounting', 'Ann Bell'),
+#                 ('Marketing', 'Ralph Morgan'), ('Accounting', 'Gloria Higgins'), ('Developing', 'Wilma Woods'),
+#                 ('Developing', 'Wilma Woods'), ('Marketing', 'Bernice Ramos'), ('Marketing', 'Joyce Lawrence'),
+#                 ('Accounting', 'Craig Wood'), ('Developing', 'Nicole Watts'), ('Sales', 'Jose Taylor'),
+#                 ('Accounting', 'Linda Hudson'), ('Accounting', 'Edna Cunningham'), ('Sales', 'Jose Taylor'),
+#                 ('Marketing', 'Helen Taylor'), ('Accounting', 'Kimberly Reynolds'), ('Marketing', 'Mary King'),
+#                 ('Sales', 'Joseph Lee'), ('Accounting', 'Gloria Higgins'), ('Marketing', 'Andrew Clark'),
+#                 ('Accounting', 'John Watts'), ('Accounting', 'Rosemary Garcia'), ('Accounting', 'Steven Diaz'),
+#                 ('Marketing', 'Mary King'), ('Sales', 'Gladys Taylor'), ('Developing', 'Thomas Porter'),
+#                 ('Accounting', 'Brenda Davis'), ('Sales', 'Connie Reid'), ('Sales', 'Alicia Mendoza'),
+#                 ('Marketing', 'Mario Reynolds'), ('Sales', 'John White'), ('Developing', 'Joyce Rivera'),
+#                 ('Accounting', 'Steven Diaz'), ('Developing', 'Arlene Gibson'), ('Sales', 'Robert Barnes'),
+#                 ('Sales', 'Charlotte Cox'), ('Accounting', 'Craig Wood'), ('Marketing', 'Carol Peters'),
+#                 ('Marketing', 'Ralph Morgan'), ('Accounting', 'Kay Scott'), ('Sales', 'Evelyn Martin'),
+#                 ('Marketing', 'Billy Lloyd'), ('Sales', 'Gladys Taylor'), ('Developing', 'Deborah George'),
+#                 ('Sales', 'Charlotte Cox'), ('Marketing', 'Sam Davis'), ('Sales', 'John White'),
+#                 ('Sales', 'Marie Cooper'), ('Marketing', 'John Gonzalez'), ('Sales', 'John Washington'),
+#                 ('Sales', 'Chester Fernandez'), ('Sales', 'Alicia Mendoza'), ('Sales', 'Katie Warner'),
+#                 ('Accounting', 'Jane Jackson'), ('Sales', 'Chester Fernandez'), ('Marketing', 'Charles Bailey'),
+#                 ('Marketing', 'Gail Hill'), ('Accounting', 'Casey Jenkins'), ('Accounting', 'James Wilkins'),
+#                 ('Accounting', 'Casey Jenkins'), ('Marketing', 'Mario Reynolds'), ('Accounting', 'Aaron Ferguson'),
+#                 ('Accounting', 'Kimberly Reynolds'), ('Sales', 'Robert Barnes'), ('Accounting', 'Aaron Ferguson'),
+#                 ('Accounting', 'Jane Jackson'), ('Developing', 'Deborah George'), ('Accounting', 'Michelle Wright'),
+#                 ('Accounting', 'Dale Houston')]
+# my_dict = defaultdict(set)
+# for k, v in staff_broken:
+#     my_dict[k].add(v)
+# for k, v in sorted(my_dict.items()):
+#     print(f'{k}: {", ".join(sorted(v))}')
+
+
+# ФУНКЦИЯ wins():
+
+# from collections import defaultdict
+#
+#
+# def wins(lst):
+#     answer = defaultdict(set)
+#     for k, v in lst:
+#         answer[k].add(v)
+#     return answer
+#
+#
+# # Вызов функции
+# result = wins([('Тимур', 'Артур'), ('Тимур', 'Дима'), ('Дима', 'Артур')])
+# # Выводим ответ
+# for winner, losers in sorted(result.items()):
+#     print(winner, '->', *sorted(losers))
+
+
+# ФУНКЦИЯ flip_dict()
+
+# from collections import defaultdict
+#
+#
+# def flip_dict(my_dict):
+#     result = defaultdict(list)
+#     for k, v in my_dict.items():
+#         for i in v:
+#             result[i].append(k)
+#     return result
+#
+#
+# print(flip_dict({'a': [1, 2], 'b': [3, 1], 'c': [2]}))
+
+
+# ФУНКЦИЯ best_sender()
+
+# from collections import defaultdict
+#
+#
+# def best_sender(messages, senders):
+#     result = defaultdict(list)
+#     for k, v in zip(senders, messages):
+#         result[k].append(len(v.split()))
+#     return max(result.items(), key=lambda x: (sum(x[1], len(x[0]))))[0]
+#
+#
+# messages = ['How is Stepik for everyone', 'Stepik is useful for practice']
+# senders = ['Bob', 'Charlie']
+#
+# print(best_sender(messages, senders))
+
+
+# 6.6.1
+
+# from collections import OrderedDict
+#
+# data = OrderedDict({'Name': 'Брусника', 'IsNetObject': 'да', 'OperatingCompany': 'Брусника', 'TypeObject': 'кафе',
+#                     'AdmArea': 'Центральный административный округ', 'District': 'район Арбат',
+#                     'Address': 'город Москва, переулок Сивцев Вражек, дом 6/2', 'SeatsCount': '10'})
+# print(OrderedDict(reversed(data.items())))
+
+
+# 6.6.2
+
+# from collections import OrderedDict
+#
+# data = OrderedDict({'Name': 'Брусника', 'IsNetObject': 'да', 'OperatingCompany': 'Брусника', 'TypeObject': 'кафе',
+#                     'AdmArea': 'Центральный административный округ', 'District': 'район Арбат',
+#                     'Address': 'город Москва, переулок Сивцев Вражек, дом 6/2', 'SeatsCount': '10'})
+# new_data = OrderedDict()
+# for i in range(len(data) // 2):
+#     k, v = data.popitem(last=False)
+#     new_data[k] = v
+#     k, v = data.popitem()
+#     new_data[k] = v
+# print(new_data)
+# OR
+# from collections import OrderedDict
+#
+# data = OrderedDict({'Name': 'Брусника', 'IsNetObject': 'да', 'OperatingCompany': 'Брусника', 'TypeObject': 'кафе',
+#                     'AdmArea': 'Центральный административный округ', 'District': 'район Арбат',
+#                     'Address': 'город Москва, переулок Сивцев Вражек, дом 6/2', 'SeatsCount': '10'})
+#
+# new = OrderedDict()
+# while data:
+#     new.setdefault(*data.popitem(last=(len(new) % 2)))
+#
+# print(new)
+
+
+# 6.6.3
+
+# from collections import OrderedDict
+#
+# data = OrderedDict(
+#     {'Law & Order': 1990, 'The Practice': 1997, 'Six Feet Under': 2001, 'Joan of Arcadia': 2003, 'The West Wing': 1999,
+#      'Deadwood': 2004, 'The Sopranos': 1999, 'Boston Legal': 2004, 'ER': 1994, 'Friday Night Lights': 2006, '24': 2001,
+#      'Heroes': 2006, 'Lost': 2004, 'Dexter': 2006, 'Damages': 2007, 'Big Love': 2006, 'House': 2004,
+#      'Downton Abbey': 2010, "Grey's Anatomy": 2005, 'Homeland': 2011, 'Breaking Bad': 2008, 'Game of Thrones': 2011,
+#      'CSI: Crime Scene Investigations': 2000, 'Boardwalk Empire': 2010, 'True Blood': 2008, 'House of Cards': 2013,
+#      'True Detective': 2014})
+# data.sorted_keys = lambda reverse=False: sorted(data.keys(), reverse=reverse)
+# data.sorted_values = lambda reverse=False: sorted(data.values(), reverse=reverse)
+# print(data.sorted_values())
+
+# ФУНКЦИЯ custom_sort() 🌶️
+
+# from collections import OrderedDict
+#
+#
+# def custom_sort(ordered_dict, by_values=False):
+#     if by_values:
+#         for k, v in sorted(ordered_dict.items(), key=lambda x: x[1]):
+#             ordered_dict.move_to_end(k, v)
+#     else:
+#         for k, v in sorted(ordered_dict.items()):
+#             ordered_dict.move_to_end(k, v)
+#
+#
+# data1 = OrderedDict(e=11, b=22, a=99, g=33, c=33, d=33, h=99, f=77, i=88, k=44)
+# custom_sort(data1, by_values=False)
+#
+# print(*data1.items())
+
+
+# 6.7.1
+
+# from collections import Counter
+#
+# files = ['emoji_smile.jpeg', 'city-of-the-sun.mp3', 'dhook_hw.json', 'sample.xml',
+#          'teamspeak3.exe', 'project_module3.py', 'math_lesson3.mp4', 'old_memories.mp4',
+#          'spiritfarer.exe', 'backups.json', 'python_for_beg1.mp4', 'emoji_angry.jpeg',
+#          'exam_results.csv', 'project_main.py', 'classes.csv', 'plants.xml',
+#          'cant-help-myself.mp3', 'microsoft_edge.exe', 'steam.exe', 'math_lesson4.mp4',
+#          'city.jpeg', 'bad-disease.mp3', 'beauty.jpeg', 'hollow_knight_silksong.exe',
+#          'whatsapp.exe', 'photoshop.exe', 'telegram.exe', 'yandex_browser.exe',
+#          'math_lesson7.mp4', 'students.csv', 'emojis.zip', '7z.zip',
+#          'bones.mp3', 'python3.zip', 'dhook_lsns.json', 'carl_backups.json',
+#          'forest.jpeg', 'python_for_pro8.mp4', 'yandexdisc.exe', 'but-you.mp3',
+#          'project_module1.py', 'nothing.xml', 'flowers.jpeg', 'grades.csv',
+#          'nvidia_gf.exe', 'small_txt.zip', 'project_module2.py', 'tab.csv',
+#          'note.xml', 'sony_vegas11.exe', 'friends.jpeg', 'data.pkl']
+#
+# data = Counter([i.split('.')[1] for i in files])
+# for k, v in sorted(data.items()):
+#     print(f'{k}: {v}')
+
+
+# ФУНКЦИЯ count_occurences()
+
+# from collections import Counter
+#
+#
+# def count_occurences(word, words):
+#     words = words.lower().split()
+#     word = word.lower()
+#     return Counter(words)[word]
+#
+#
+# word = 'python'
+# words = 'Python Conferences python training python events'
+
+# print(count_occurences(word, words))
+
+
+# НЕ ПОЛЕНИМСЯ И ЗАПИШЕМ
+
+# from collections import Counter
+#
+# txt = input().split(',')
+# # Считаем одинаковые записи и выводим
+# for k, v in sorted(Counter(txt).items()):
+#     print(f'{k}: {v}')
+
+# А СКОЛЬКО СТОИТ КУРС?
+
+# from collections import Counter
+#
+#
+# def uc(txt):
+#     """
+#         Функция должна определять, число символа по юникоду.
+#         Далее все найденные числа суммируем.
+#     """
+#     return sum([ord(i) for i in txt if i.replace(' ', '')])
+#
+#
+# # Создали счетчик
+# txt = Counter(sorted(input().split(',')))
+# # Максимальная длина товара -> для рассчета пробелов при выводе
+# max_len = len(max(txt, key=len))
+# # Выводим с учетом макс. длины слова
+# for k, v in txt.items():
+#     # print(f'{k + (" " * (max_len - len(k)))}: {uc(k)} UC x {v} = {uc(k) * v} UC')
+# # OR
+#     print(f'{k.ljust(max_len, " ")}: {uc(k)} UC x {v} = {uc(k) * v} UC')
+
+
+# THE ZEN OF PYTHON
+
+# from string import ascii_lowercase
+# from collections import Counter
+#
+# with open('pythonzen.txt', 'r', encoding='utf-8') as file:
+#     words = file.read().lower()
+#     new_words = list(filter(str.strip, words))
+#     result = []
+#     for word in sorted(new_words):
+#         if word in ascii_lowercase:
+#             result.append(word)
+#     for k, v in sorted(Counter(result).items()):
+#         print(f'{k}: {v}')
+# OR
+# from collections import Counter
+#
+# with open('pythonzen.txt', 'r', encoding='utf-8') as file:
+#     letters = Counter([letter.lower() for letter in file.read() if letter.isalpha()])
+#
+# for letter in sorted(letters):
+#     print(f'{letter}: {letters[letter]}')
+
+
+# В ПОИСКАХ СЛОВ 😇
+
+# from collections import Counter
+#
+# txt = Counter(input().lower().split()).most_common()
+# print(max(txt, key=lambda x: x[1])[0])
+
+
+# В ПОИСКАХ СЛОВ 😋
+
+# from collections import Counter
+#
+# txt = Counter(input().lower().split()).most_common()
+# comparative = min(txt, key=lambda x: x[1])
+# answer = [k for k, v in txt if v == comparative[1]]
+# print(*sorted(answer), sep=', ')
+
+
+# В ПОИСКАХ СЛОВ 🥳
+
+# from collections import Counter
+#
+# txt = Counter(input().lower().split()).most_common()
+# comparative = max(txt, key=lambda x: x[1])
+# answer = [k for k, v in txt if v == comparative[1]]
+# answer = sorted(answer)
+# print(answer[-1])
+
+
+# СТАТИСТИКА ДЛИН СЛОВ
+
+# from collections import defaultdict
+#
+# txt = input().split()
+# result = defaultdict(int)
+# for i in txt:
+#     result[len(i)] += 1
+# [print(f'Слов длины {k}: {v}') for k, v in sorted(result.items(), key=lambda x:x[1])]
+# OR
+# from collections import Counter
+#
+# res = Counter(len(word) for word in input().split())
+# for k, v in sorted(res.items(), key=lambda t: t[1]):
+#     print(f'Слов длины {k}: {v}')
+# OR
+# from collections import Counter
+
+# words = Counter(map(len, input().split())).most_common()
+# for length, count in sorted(words, key=lambda x: x[1]):
+#     print(f'Слов длины {length}: {count}')
+
+
+# ВСЕ ЕЩЕ ОДИН
+
+# import sys
+#
+# data = list((map(str.strip, sys.stdin)))
+# print(sorted(data, key=lambda x: int(x.split()[1]))[1].split()[0])
+# OR
+# from collections import Counter
+# import sys
+#
+# c = Counter()
+# for data in sys.stdin:
+#     name, score = data.split()
+#     c[name] = int(score)
+# print(c.most_common()[-2][0])
+
+
+# 6.8.6
+
+# from collections import Counter
+#
+# data = Counter('aksjaskfjsklfjdslkfjajfopewtoieqpwdpqworiiqjskanvmcxbmpewrqopkqwlmdzczmxvmvlnjpjqpkqzxvmbowiqeorewi')
+# data.max_values = lambda: list(filter(lambda x: x[1] == max(data.values()), data.most_common()))
+# data.min_values = lambda: list(filter(lambda x: x[1] == min(data.values()), data.most_common()))
+# print(data.max_values())
+
+
+# HERE WE GO AGAIN
+
+# from collections import Counter
+# import csv
+#
+# with open('name_log.csv', 'r', encoding='utf-8') as file:
+#     rows = csv.reader(file)
+#     title = next(file)
+#     c = sorted(Counter(i[1] for i in rows).items())
+# [print(f'{k}: {v}') for k, v in c]
+# OR
+# from collections import Counter
+# import csv
+#
+# with open('name_log.csv', 'r', encoding='utf-8') as file:
+#     rows = csv.reader(file)
+#     title = next(file)
+#     c = Counter()
+#     for row in sorted(rows, key=lambda x: x[1]):
+#         c[row[1]] += 1
+# [print(f'{k}: {v}') for k, v in c.items()]
+
+
+# ФУНКЦИЯ scrabble()
+
+# from collections import Counter
+#
+#
+# def scrabble(symbols, word):
+#     symbols = Counter(symbols.lower())
+#     word = Counter(word.lower())
+#     return symbols >= word
+#
+# print(scrabble('1Btee25g.ge.1e24k', 'Beegeek'))
+
+
+# ФУНКЦИЯ print_bar_chart()
+
+# from collections import Counter
+#
+#
+# def print_bar_chart(data, mark):
+#     counter = Counter(data)
+#     max_space = len(max(counter.keys(), key=len)) + 1
+#     for k, v in counter.most_common():
+#         print(f'{k.ljust(max_space, " ")}|{mark*v}')
+#
+#
+# languages = ['java', 'java', 'python', 'C++', 'assembler', 'java', 'C++', 'C', 'pascal', 'C++', 'pascal', 'java']
+#
+# print_bar_chart(languages, '☭')
+
+
+# БЕСПЛАТНЫЕ КУРСЫ БЕРУТ СВОЕ 😢
+
+# import csv, json
+# from collections import Counter
+#
+# counter = Counter()
+# money = 0
+#
+#
+# def sum_things(name_file):
+#     with open(name_file, 'r', encoding='utf-8') as file:
+#         title, *rows_1 = csv.reader(file)
+#         for name, f, s, t in rows_1:
+#             counter[name] += sum(map(int, [f, s, t]))
+#
+#
+# with open('prices.json', 'r', encoding='utf-8') as price:
+#     cost = json.load(price)
+#     for i in range(1, 5):
+#         sum_things(f'quarter{i}.csv')
+#     for k, v in counter.most_common():
+#         money += cost[k] * v
+# print(money)
+
+
+# БЕСПЛАТНЫЕ КУРСЫ БЕРУТ СВОЕ 😭
+
+# from collections import Counter
+#
+# books = Counter(map(int, input().split()))
+# money = 0
+# for i in range(int(input())):
+#     book, price = map(int, input().split())
+#     if books[book] > 0:
+#         money += price
+#     books[book] -= 1
+#
+# print(money)
+# OR
+# from collections import Counter
+#
+# books = Counter(map(int, input().split()))
+# total = 0
+#
+# for _ in range(int(input())):
+#     book, price = map(int, input().split())
+#     total += bool(books[book]) * price
+#     books -= Counter({book: 1})
+#
+# print(total)
+
+
+# FOR FUN ^_^
+
+# my_list = [1, 2, 3]
+#
+#
+# def apppend_new(num, m=None):
+#     if m is None:
+#         m = [5, 6, 9]
+#     res = m.copy()
+#     res.append(num)
+#     return res
+#
+#
+# num = int(input())
+# print(apppend_new(num))
+# print(apppend_new(num))
+
+
+# ЗООПАРК
+
+# import json
+# from collections import ChainMap
+#
+# with open('zoo.json', 'r', encoding='utf-8') as file:
+#     info = ChainMap(*json.load(file))
+#     print(sum(info.values()))
+
+
+# БУЛОЧНЫЙ МАГНАТ
+
+# from collections import ChainMap, Counter
+#
+# bread = {'булочка с кунжутом': 15, 'обычная булочка': 10, 'ржаная булочка': 15}
+# meat = {'куриный бифштекс': 50, 'говяжий бифштекс': 70, 'рыбный бифштекс': 40}
+# sauce = {'сливочно-чесночный': 15, 'кетчуп': 10, 'горчица': 10, 'барбекю': 15, 'чили': 15}
+# vegetables = {'лук': 10, 'салат': 15, 'помидор': 15, 'огурцы': 10}
+# toppings = {'сыр': 25, 'яйцо': 15, 'бекон': 30}
+#
+# all_things = ChainMap(bread, meat, sauce, vegetables, toppings)
+# buying = Counter(input().split(','))
+#
+# max_space = len(max(buying, key=len))
+# money = 0
+#
+# for k, v in sorted(buying.items()):
+#     print(f'{k.ljust(max_space, " ")} x {v}')
+#     money += all_things[k] * v
+#
+# print(f'''{"-" * max(len(f'ИТОГ: {money}р'), max_space + 3 + len(str(max(buying.values()))))}
+# ИТОГ: {money}р''')
+
+
+# ФУНКЦИЯ get_all_values()
+
+# from collections import ChainMap
+#
+#
+# def get_all_values(chainmap, txt):
+#     my_set = set()
+#     for i in chainmap.maps:
+#         if i.get(txt, None) != None:
+#             my_set.add(i[txt])
+#     return my_set
+#
+#
+# chainmap = ChainMap({'name': 'Arthur'}, {'name': 'Timur'})
+# result = get_all_values(chainmap, 'nam')
+#
+# print(*sorted(result))
+
+
+# ФУНКЦИЯ deep_update()
+
+# from collections import ChainMap
+#
+#
+# def deep_update(chainmap, key, value):
+#     for i in chainmap.maps:
+#         if key in i:
+#             i[key] = value
+#     if key not in chainmap.keys():
+#         chainmap[key] = value
+#
+#
+#
+# chainmap = ChainMap({'name': 'Arthur'}, {'name': 'Timur'})
+# deep_update(chainmap, 'age', 20)
+#
+# print(chainmap)
+
+
+# ФУНКЦИЯ
+
+# from collections import ChainMap
+#
+#
+# def get_value(chainmap, key, from_left=True):
+#     if from_left is True and key in chainmap:
+#         return chainmap[key]
+#     elif from_left is False and key in chainmap:
+#         chainmap = ChainMap(*chainmap.maps[::-1])
+#         return chainmap[key]
+#
+#
+# chainmap = ChainMap({'age': 20}, {'city': 'Moscow'}, {'name': 'Anri', 'age': 20}, {'name': 'Timur', 'age': 29})
+#
+# print(get_value(chainmap, 'age', False))
 
