@@ -7,6 +7,7 @@
 #
 # print(hide_card(card))
 
+
 # ВЫВОДИМ ВСЕ ЭЛЕМЕНТЫ СОВПАДАЮЩИЕ С ЧЕТНОСТЬЮ ПЕРВОГО
 
 # def same_parity(args):
@@ -2907,4 +2908,328 @@
 # chainmap = ChainMap({'age': 20}, {'city': 'Moscow'}, {'name': 'Anri', 'age': 20}, {'name': 'Timur', 'age': 29})
 #
 # print(get_value(chainmap, 'age', False))
+
+# EPISODE 7 ^_^
+# ______________
+
+
+# РЕВЬЮ КОДА 😤
+
+# total = 0
+#
+# with open('data.txt', 'r', encoding='utf-8') as file:
+#     for _ in file.readlines():
+#         total += 1
+#
+# print(total)
+
+
+# РЕВЬЮ КОДА 😠
+
+# def swapcase_vowels(string):
+#     vowels = 'aeiouy'
+#     swapped_string = ''
+#
+#     for char in string:
+#         if char in vowels:
+#             char = char.upper()
+#         swapped_string += char
+#
+#     return swapped_string
+
+
+# РЕВЬЮ КОДА 😡
+
+# a = int(input())
+# b = int(input())
+# numbers = []
+#
+# for i in range(a, b + 1):
+#     if i % 7 == 0:
+#         numbers.append(i)
+#
+# print(numbers)
+
+
+# РЕВЬЮ КОДА 🤬
+
+# def get_max_index(numbers):
+#     max_index = numbers.index(max(numbers))
+#
+#     return max_index
+
+
+# 7.2.1
+
+# blog_posts = [{'Photos': 3, 'Likes': 21, 'Comments': 2},
+#               {'Likes': 13, 'Comments': 2, 'Shares': 1},
+#               {'Photos': 5, 'Likes': 33, 'Comments': 8, 'Shares': 3},
+#               {'Comments': 4, 'Shares': 2},
+#               {'Photos': 8, 'Comments': 1, 'Shares': 1},
+#               {'Photos': 3, 'Likes': 19, 'Comments': 3}]
+#
+# total_likes = 0
+#
+# for post in blog_posts:
+#     try:
+#         total_likes += post['Likes']
+#     except KeyError:
+#         total_likes -= 1
+# print(total_likes)
+
+
+# 7.2.2
+
+# food = ['chocolate', 'chicken', 'corn', 'sandwich', 'soup', 'potatoes', 'beef', 'lox', 'lemonade']
+# fifth = []
+#
+# for x in food:
+#     try:
+#         fifth.append(x[4])
+#     except IndexError:
+#         fifth.append('_')
+# print(fifth)
+
+
+# 7.2.3
+
+# numbers = [6, 0, 36, 8, 2, 36, 0, 12, 60, 0, 45, 0, 3, 23]
+#
+# remainders = []
+#
+# for number in numbers:
+#     try:
+#         remainders.append(36 % number)
+#     except ZeroDivisionError:
+#         pass
+# print(remainders)
+
+
+# ONLY NUMBERS
+
+# import sys
+# from decimal import Decimal
+#
+# num = Decimal(0)
+# counter = 0
+# all = [i.strip() for i in sys.stdin]
+# for i in all:
+#     try:
+#         num += Decimal(i)
+#     except:
+#         counter += 1
+# print(num)
+# print(counter)
+
+
+# ЯНВАРЬ, ФЕВРАЛЬ...
+
+# import calendar
+#
+# key = list(range(1, 13))
+# value = list(calendar.month_name[1:])
+# month = dict(zip(key, value))
+# # Или так создать словарь с месяцами
+# # months = {num: month for num, month in enumerate(calendar.month_name) if month}
+# try:
+#     data = int(input())
+#     print(month[data])
+# except KeyError:
+#     print('Введено число из недопустимого диапазона')
+# except ValueError:
+#     print('Введено некорректное значение')
+# OR
+# from calendar import month_name
+#
+# try:
+#     print(dict(zip(range(1, 13), month_name[1:]))[int(input())])
+# except KeyError:
+#     print('Введено число из недопустимого диапазона')
+# except:
+#     print('Введено некорректное значение')
+
+
+# ФУНКЦИЯ add_to_list_in_dict()
+
+# def add_to_list_in_dict(data, key, element):
+#     try:
+#         data[key].append(element)
+#     except KeyError:
+#         data[key] = [element]
+
+
+# README.TXT
+#
+# file = input()
+# try:
+#     with open(file, 'r', encoding='utf-8') as file:
+#         print(file.read())
+# except:
+#     print('Файл не найден')
+
+
+# ФУНКЦИЯ get_weekday()
+
+# import calendar, locale
+#
+# locale.setlocale(locale.LC_ALL, 'ru_RU.UTF-8')
+#
+#
+# def get_weekday(number):
+#     days = {num: day for num, day in enumerate(calendar.day_name, 1) if day}
+#     if not isinstance(number, int):
+#         raise TypeError('Аргумент не является целым числом')
+#     elif not 1 <= number <= 7:
+#         raise ValueError('Аргумент не принадлежит требуемому диапазону')
+#     return days[number]
+#
+#
+# try:
+#     print(get_weekday(8))
+# except ValueError as err:
+#     print(err)
+#     print(type(err))
+
+# ФУНКЦИЯ get_id()
+
+# def get_id(names: list, name: str):
+#     if not isinstance(name, str):
+#         raise TypeError('Имя не является строкой')
+#     elif not name.istitle() or not name.isalpha():
+#         raise ValueError('Имя не является корректным')
+#     names.append(name)
+#     return len(names)
+#
+#
+# names = ['Timur', 'Anri', 'Dima']
+# name = 'Arthur'
+#
+# print(get_id(names, name))
+
+
+# ДЕСЕРИАЛИЗАЦИЯ
+
+# import json
+#
+# try:
+#     with open(input(), 'r', encoding='utf-8') as file:
+#         info = json.load(file)
+#         print(info)
+# except ValueError:
+#     print('Ошибка при десериализации')
+# except FileNotFoundError:
+#     print('Файл не найден')
+# OR
+# import json
+#
+# try:
+#     with open(input(), 'r', encoding='utf-8') as file:
+#         try:
+#             info = json.load(file)
+#             print(info)
+#         except:
+#             print('Ошибка при десериализации')
+# except FileNotFoundError:
+#     print('Файл не найден')
+
+
+# ФУНКЦИЯ is_good_password() 👀
+
+# def is_good_password(string: str):
+#     if all(
+#         (len(string) >= 9,
+#          any(c.islower() for c in string),
+#          any(c.isupper() for c in string),
+#          any(c.isdigit() for c in string))
+#             ):
+#         return True
+#     else:
+#         return False
+#
+#
+# print(is_good_password('4abcdABC'))
+
+
+# ФУНКЦИЯ is_good_password() 🐍
+
+# class PasswordError(Exception):
+#     pass
+#
+#
+# class LengthError(PasswordError):
+#     pass
+#
+#
+# class LetterError(PasswordError):
+#     pass
+#
+#
+# class DigitError(PasswordError):
+#     pass
+#
+#
+# def is_good_password(string: str):
+#
+#     if len(string) < 9:
+#         raise LengthError
+#
+#     elif string == string.upper() or string == string.lower():
+#         raise LetterError
+#
+#     elif not any(c.isdigit() for c in string):
+#         raise DigitError
+#
+#     return True
+#
+# try:
+#     print(is_good_password('125634623623q'))
+# except Exception as err:
+#     print(type(err))
+
+
+# УЖ ЛУЧШЕ МАТРИЦЫ 😐
+
+# import sys
+#
+#
+# class PasswordError(Exception):
+#     pass
+#
+#
+# class LengthError(PasswordError):
+#     pass
+#
+#
+# class LetterError(PasswordError):
+#     pass
+#
+#
+# class DigitError(PasswordError):
+#     pass
+#
+#
+# def is_good_password(string: str):
+#     if len(string) < 9:
+#         raise LengthError
+#
+#     elif string == string.upper() or string == string.lower():
+#         raise LetterError
+#
+#     elif not any(c.isdigit() for c in string):
+#         raise DigitError
+#
+#     return True
+#
+#
+# passwords = [i.strip() for i in sys.stdin]
+#
+# for i in passwords:
+#     try:
+#         if is_good_password(i):
+#             print('Success!')
+#             break
+#
+#     except Exception as err:
+#         print(err.__class__.__name__)
+
 
