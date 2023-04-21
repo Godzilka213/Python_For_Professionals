@@ -3687,3 +3687,1086 @@
 # data = {'d': 1, 'b': {'c': 30, 'a': 10, 'b': 20}, 'a': 100}
 #
 # dict_travel(data)
+
+
+# EPISODE 9 ^_^
+# ______________
+
+
+# СТРОЧНЫЙ АЛФАВИТ
+
+
+# [print(chr(i)) for i in range(97, 123)]
+
+
+# ФУНКЦИЯ convert()
+
+# def convert(num):
+#     return f'{num:#b}', f'{num:o}', f'{num:X}'
+#
+# print(convert(int(input())))
+
+
+# 9.1.3
+
+# films = {'Spider-Man: No Way Home': {'imdb': 8.8, 'kinopoisk': 8.3},
+#          'Don"t Look Up': {'imdb': 7.3, 'kinopoisk': 7.6},
+#          'Encanto': {'imdb': 7.3, 'kinopoisk': 7.4},
+#          'The Witcher': {'imdb': 8.2, 'kinopoisk': 7.3},
+#          'Ghostbusters: Afterlife': {'imdb': 7.3, 'kinopoisk': 8},
+#          'Harry Potter 20th Anniversary: Return to Hogwarts': {'imdb': 8.1, 'kinopoisk': 8.2},
+#          'Shingeki no Kyojin': {'imdb': 9.0, 'kinopoisk': 8.3},
+#          'The Matrix': {'imdb': 8.7, 'kinopoisk': 8.5},
+#          'The Dark Knight': {'imdb': 9.0, 'kinopoisk': 8.5},
+#          'The Shawshank Redemption': {'imdb': 9.3, 'kinopoisk': 9.1},
+#          'Avengers: Endgame': {'imdb': 8.4, 'kinopoisk': 7.7}}
+# print(min(films, key=lambda x: sum(films[x].values())))
+
+
+# ФУНКЦИЯ non_negative_even()
+
+# def non_negative_even(lst):
+#     return all(map(lambda x: x >= 0 and x % 2 == 0, lst))
+# OR
+# def non_negative_even(numbers):
+#     return all(i >= 0 and i % 2 == 0 for i in numbers)
+#
+#
+# print(non_negative_even([0, 2, 4, 8, 16]))
+
+
+# ФУНКЦИЯ is_greater()
+
+# def is_greater(data, num):
+#     return any(sum(i) > num for i in data)
+#
+#
+# data = [[-3, 4, 0, 1], [1, 1, -4], [0, 0], [9, 3]]
+# print(is_greater(data, 10))
+
+
+# ФУНКЦИЯ custom_isinstance()
+#
+# def custom_isinstance(list, check):
+#     return sum([1 for i in list if isinstance(i, check)])
+#
+#
+# numbers = [1, 'two', 3.0, 'четыре', 5, 6.0]
+# print(custom_isinstance(numbers, int))
+
+
+# 9.1.7
+
+# numbers = [-7724, 5023, 3197, -102, -4129, -880, 5857, -2866, -8913, 1195, 9809, 5347, -8071, 903, 3030, -4347, -3354,
+#            1024, 8670, 4210, -5228, 8900, 4823, -2002, 4900, 9520, -3658, 1104, -9554, 3064, 9632, -8701, 3384, 4370,
+#            2034, 7822, -9694, 3347, 7440, -8459, 3238, -5193, -3381, 5281, 9022, 5559, 7593, -6540, -6204, -2483, 8729,
+#            5810, -8254, -9846, -1801, 4882, 3838, -3140, 7609, -3325, 6026, 2994, -1677, 1266, -1893, -4408, -5722,
+#            -2841, 9812, 5837, -7474, 4624, -664, 6998, 7888, -971, 8810, 3812, -5396, 2593, 512, -4634, 9735, -3062,
+#            9031, -9300, 3657, 6332, 7552, 8125, -725, 4392, 1727, 8194, -2828, -4314, -8967, -7912, -1363, -5957]
+# print(numbers.index(max(numbers)))
+# # OR
+# from operator import itemgetter
+# print(max(enumerate(numbers), key=itemgetter(1))[0])
+
+
+# ФУНКЦИЯ my_pow()
+
+# from functools import reduce
+#
+# def my_pow(num):
+#     num = enumerate(str(num), 1)
+#     return reduce(lambda x, y: x + int(y[1])**y[0], num, 0)
+# OR
+# def my_pow(num):
+#     res = 0
+#     for p, n in num:
+#         res += int(n) ** p
+#     return res
+
+
+# print(my_pow(139))
+
+
+# 9.1.9
+
+# names = ['Moana', 'Cars', 'Zootopia', 'Ratatouille', 'Coco', 'Inside Out', 'Finding Nemo', 'Frozen']
+# budgets = [150000000, 120000000, 150000000, 150000000, 180000000, 175000000, 94000000, 150000000]
+# box_offices = [643331111, 462216280, 1023784195, 620702951, 807082196, 857611174, 940335536, 1280802282]
+# [print(f'{name}: {plus - cost}$') for name, cost, plus in sorted(zip(names, budgets, box_offices), key=lambda x: x[0])]
+# OR
+# for name, cost, plus in sorted(zip(names, budgets, box_offices), key=lambda x: x[0]):
+#     print(f'{name}: {plus - cost}$')
+
+
+# ФУНКЦИЯ zip_longest()
+
+# def zip_longest(*args, fill=None):
+#     max_len = max(map(len, args))
+#     result = [i + [fill] * (max_len - len(i)) for i in args]
+#     return list(zip(*result))
+#
+#
+# print(zip_longest([1, 2, 3, 4, 5], ['a', 'b', 'c'], fill='_'))
+# OR
+# import itertools
+#
+# def zip_longest(*args, fill = None):
+#     return list(itertools.zip_longest(*args, fillvalue=fill))
+
+
+# НЕОБЫЧНАЯ СОРТИРОВКА 🌶️
+
+# txt = list(input())
+# txt = sorted(txt)
+# for i in sorted(txt, key=lambda x: (not x.islower(), not x.isupper(), int(x) % 2 == 0 if x.isdigit() else x)):
+#     print(i, end='')
+
+
+# ФУНКЦИЯ hash_as_key()
+
+# def hash_as_key(data):
+#     result = {}
+#     for i in data:
+#         if data.count(i) == 1 and hash(i) != -2:
+#             result[hash(i)] = i
+#         else:
+#             result.setdefault(hash(i), []).append(i)
+#     return result
+#
+#
+# data = [-1, -2, -3, -4, -5]
+#
+# print(hash_as_key(data))
+
+
+# КОЛЛЕКЦИИ
+
+# txt = eval(input())
+#
+# if isinstance(txt, list):
+#     print(txt[-1])
+# if isinstance(txt, tuple):
+#     print(txt[0])
+# elif isinstance(txt, set):
+#     print(len(txt))
+
+
+# МАТЕМАТИЧЕСКИЕ ВЫРАЖЕНИЯ
+
+# import sys
+# print(max([eval(i) for i in sys.stdin]))
+
+
+# МИНИМУМ И МАКСИМУМ
+
+# func = input()
+# x = list(map(int, input().split()))
+#
+# result = [(eval(func)) for x in range(x[0], x[1] + 1)]
+#
+# print(f'Минимальное значение функции {func} на отрезке [{x[0]}; {x[1]}] равно {min(result)}')
+# print(f'Максимальное значение функции {func} на отрезке [{x[0]}; {x[1]}] равно {max(result)}')
+
+
+# 9.3.1
+
+# data = ['Timur', -16.648911695768902, 'six', -202, 883.0093275936454, -765, (3, 4), -105.10718000213546, 976,
+#         -308.96857946288094, 458, ['one', 'two'], 479.92207220345927, -87, -71, 'twelve', 112, -621, -715.0179551194733,
+#         'seven', 229, 729, -358, [1, 2, 3], -974, 882, -894.4709033242768, '', 323.7720806756133, 'beegeek', -224, 431,
+#         170.6353248658936, -343.0016746052049, 'number', 104.17133679352878, [], -353.5964777099863, 'zero', -113, 288,
+#         None, -708.3036176571618]
+# fil = filter(lambda x: isinstance(x, (int, float)), data)
+# [print(int(i)) for i in fil]
+
+
+# 9.3.2
+
+# numbers = [4754, -4895, -364, -4764, 4683, 1639, -43, 228, -2701, -1503, 1223, 4340, -1296, 3939, -345, 623, -3275,
+#            1003, 4367, -1739, 550, -1217, -1334, 1526, -4359, -3028, -4663, 3356, 3887, 4297, -1982, 1013, 3299, 3556,
+#            -3324, 417, 3531, -3134, 1782, 4439, 1652, -985, 4327, 1517, 1225, -915, 2808, -3851, -1005, 3396, 2842,
+#            -3879, -3824, -3805, 1609, -4741, -3072, 3573, 4680, 588, -1430, 2378, -1095, -343, 4357, -2164, -3304, 4354,
+#            4926, -352, -1187, -3313, 2741, 4786, -2689, 741, 4558, 1442, 62, -1099, -2201, -16, -3115, 1862, 2384, 4072,
+#            -90, 204, 1158, -3134, -2512, 756, 4148, 4370, 1756, 3609, -1148, -3909, 4123, -2906, 69, 96, 1111]
+# fil = list(filter(lambda x: len(str(abs(x))) == 2 and x % 9 == 0, numbers))
+# print(sum(map(lambda x: x**2, fil)))
+
+
+# 9.3.3
+
+# names = ['ульяна', 'арина', 'Дмитрий', 'Сергей', 'Яна', 'мила', 'Ольга', 'софья', 'семён', 'Никита', 'маргарита',
+#          'Василиса', 'Кирилл', 'александр', 'александра', 'Иван', 'андрей', 'Родион', 'максим', 'алиса', 'Артём',
+#          'софия', 'владимир', 'дамир', 'Валерий', 'степан', 'Алексей', 'Марк', 'олег', 'ирина', 'Милана', 'мия',
+#          'денис', 'Фёдор', 'Елизавета', 'айлин', 'Варвара', 'валерия', 'Алёна', 'Николь', 'юлия', 'Ксения', 'пётр',
+#          'георгий', 'Мария', 'глеб', 'илья', 'Захар', 'Дарья', 'Евгения', 'матвей', 'Серафим', 'екатерина', 'Тимофей',
+#          'виктор', 'Егор', 'Ника', 'анна', 'даниил', 'тихон', 'вера', 'кира', 'Эмилия', 'Виктория', 'Игорь', 'полина',
+#          'алина', 'Давид', 'анастасия', 'Вероника', 'ярослав', 'Руслан', 'татьяна', 'Демид', 'амелия', 'Элина', 'Арсен',
+#          'евгений', 'мадина', 'дарина', 'Савелий', 'Платон', 'Аделина', 'диана', 'Айша', 'павел', 'Стефания', 'Тимур',
+#          'Ева', 'Елисей', 'Артемий', 'григорий', 'Мирон', 'Мирослава', 'Мира', 'Марат', 'Лилия', 'роман', 'владислав',
+#          'Леонид']
+# names_sotr = map(str.capitalize, (filter(lambda x: x[0].lower() in ('ам') and len(x) > 4, names)))
+# print(*sorted(names_sotr))
+
+
+# ФУНКЦИЯ sfib()
+
+# fib = lambda x: 1 if x <= 2 else fib(x - 1) + fib(x-2)
+# print(fib(5))
+
+
+# ФУНКЦИЯ print_operation_table()
+
+# def print_operation_table(operation, rows, cols):
+#     for i in range(1, rows + 1):
+#         res = []
+#         for j in range(1, cols + 1):
+#             res.append(str(operation(i, j)).ljust(3))
+#         print(*res)
+# OR
+# def print_operation_table(operation, rows, cols):
+#     for i in range(1, rows + 1):
+#         print(*map(operation, [i] * cols, range(1, cols + 1)))
+#
+#
+# print_operation_table(lambda a, b: a * b, 5, 5)
+
+
+# ФУНКЦИЯ verification()
+
+# from string import ascii_lowercase, ascii_uppercase, digits
+#
+#
+# def verification(login, password, success, failure):
+#     check_box = all([any(map(lambda x: x in ascii_lowercase, password)),
+#                      any(map(lambda x: x in ascii_uppercase, password)),
+#                      any(map(lambda x: x in digits, password))])
+#     if check_box is True:
+#         return success(login)
+#
+#     elif check_box is False:
+#         if len([i for i in password if i in ascii_lowercase]) == 0 and \
+#             len([i for i in password if i in ascii_uppercase]) == 0:
+#             text = 'в пароле нет ни одной буквы'
+#             return failure(login, text)
+#         elif len([i for i in password if i in ascii_uppercase]) == 0:
+#             text = 'в пароле нет ни одной заглавной буквы'
+#             return failure(login, text)
+#         elif len([i for i in password if i in ascii_lowercase]) == 0:
+#             text = 'в пароле нет ни одной строчной буквы'
+#             return failure(login, text)
+#         else:
+#             text = 'в пароле нет ни одной цифры'
+#             return failure(login, text)
+#
+#
+# def success(login):
+#     print(f'Здравствуйте, {login}!')
+#
+#
+# def failure(login, text):
+#     print(f'{login}, попробуйте снова. Текст ошибки: {text}')
+#
+#
+# verification('Arthur_Davletov', 'мойпарольBEE123', success, failure)
+# OR
+# def verification(login, password, success, failure):
+#     vd = {(str.isalpha, str.isascii): 'в пароле нет ни одной буквы',
+#           (str.isascii, str.islower): 'в пароле нет ни одной строчной буквы',
+#           (str.isascii, str.isupper): 'в пароле нет ни одной заглавной буквы',
+#           (bool,        str.isdigit): 'в пароле нет ни одной цифры'}
+#     for f in vd:
+#         if not any(f[0](i) and f[1](i) for i in password):
+#             return failure(login, vd[f])
+#     success(login)
+
+
+# ФУНКЦИЯ numbers_sum()
+
+# def numbers_sum(lst):
+#     """Принимает список и возвращает сумму его чисел (int, float),
+#     игнорируя нечисловые объекты. 0 - если в списке чисел нет."""""
+#     return sum([i for i in lst if isinstance(i, (int, float))])
+#
+#
+# print(numbers_sum(['beegeek', 'stepik', '100']))
+
+
+# НОВЫЙ print()
+
+# old_print = print
+#
+#
+# def print(*args, **kwargs):
+#     res = [i.upper() if isinstance(i, str) else i for i in args]
+#     if not kwargs:
+#         old_print(*res)
+#     else:
+#         kwargs = [i[1].upper() for i in kwargs.items()]
+#         old_print(*res, sep=kwargs[0], end=kwargs[1])
+#
+#
+# print('beegeek', [1, 2, 3], 4)
+# OR
+# from sys import stdout
+#
+# def print(*s, sep=" ", end="\n"):
+#     result = sep.upper().join(map(lambda x: str(x).upper() if type(x) is str else str(x), s)) + end.upper()
+#     stdout.write(result)
+
+
+# ФУНКЦИЯ polynom()
+
+# def polynom(num):
+#     res = num * num + 1
+#     polynom.values.add(res)
+#
+#     return res
+#
+#
+# polynom.__dict__['values'] = set()
+#
+# for _ in range(10):
+#     polynom(10)
+#
+# print(polynom.values)
+
+
+# ФУНКЦИЯ remove_marks()
+
+# def remove_marks(text, marks):
+#     remove_marks.__dict__['count'] = remove_marks.__dict__.get('count', 0) + 1
+#     marks = list(marks)
+#     res = [i for i in text if i not in marks]
+#     return ''.join(res)
+#
+#
+# marks = '.,!?'
+# text = 'Are you listening? Meet my family! There are my parents, my brother and me.'
+#
+# for mark in marks:
+#     print(remove_marks(text, mark))
+#
+# print(remove_marks.count)
+# OR
+# def remove_marks(text, marks):
+#     remove_marks.count += 1
+#     return ''.join(filter(lambda x: x not in marks, text))
+#
+#
+# remove_marks.count = 0
+
+
+# ФУНКЦИЯ power()
+
+# def power(step):
+#     def square(num):
+#         return num ** step
+#
+#     return square
+#
+#
+# square = power(2)
+# print(square(5))
+
+
+# ФУНКЦИЯ generator_square_polynom()
+#
+# def generator_square_polynom(a, b, c):
+#     def solve(x):
+#         f = a*x**2 + b*x + c
+#         return f
+#
+#     return solve
+#
+#
+# f = generator_square_polynom(26, 83, 22)
+# print(f(55))
+
+# ФУНКЦИЯ sourcetemplate()
+
+# def sourcetemplate(url):
+#     def load(**kwargs):
+#         if not kwargs:
+#             return url
+#         else:
+#             txt = [f'{str(k)}={str(v)}' for k, v in sorted(kwargs.items())]
+#             return f'{url}?' + '&'.join(txt)
+#
+#     return load
+#
+#
+# url = 'https://stepik.org/lesson/651459/step/14'
+# load = sourcetemplate(url)
+# print(load(thread='solutions', unit=648165, sase='agss'))
+
+# ФУНКЦИЯ date_formatter()
+
+# from datetime import date
+#
+#
+# def date_formatter(txt):
+#     county_code = {'ru': '%d.%m.%Y',
+#                    'us': '%m-%d-%Y',
+#                    'ca': '%Y-%m-%d',
+#                    'br': '%d/%m/%Y',
+#                    'fr': '%d.%m.%Y',
+#                    'pt': '%d-%m-%Y'}
+#
+#     def today(d):
+#         return d.strftime(county_code[txt])
+#
+#     return today
+#
+#
+# date_ru = date_formatter('ca')
+# today = date(2015, 12, 7)
+# print(date_ru(today))
+
+
+# ФУНКЦИЯ sort_priority() 🌶️
+
+# def sort_priority(values: list, group: (list, tuple, set)):
+#     new_group = [i for i in group if i in values]
+#     values[:] = sorted(new_group) + sorted(set(values) ^ set(new_group))
+
+
+# OR
+# def sort_priority(numbers, group):
+#     numbers.sort(key=lambda x: (x not in group, x))
+# OR
+# def sort_priority(values, group):
+#     values.sort()
+#     values.sort(key=lambda x: not x in group)
+
+# data = list(range(0, 100, 5))
+# sort_priority(data, {1, 90, 95, 25, 55, 64})
+#
+# print(data)
+
+# ФУНКЦИЯ get_digits()
+
+# def get_digits(number: int | float) -> list[int]:
+#     """Возвращает список чисел"""
+
+# return [int(i) for i in str(number) if i.isdigit()]
+
+
+# print(get_digits(13.909934))
+
+
+# ФУНКЦИЯ top_grade()
+
+# def top_grade(grades: dict[str, str | list[int]]) -> dict[str, str | int]:
+#     res = {}
+#     res['name'] = grades['name']
+#     res['top_grade'] = max(list(grades.items())[1][1])
+#     return res
+# OR
+# def top_grade(grades: dict[str, str | list[int]]) -> dict[str, str | int]:
+#     grades['top_grade'] = max(grades.pop('grades'))
+# return grades
+
+# print(top_grade({'name': 'Ruslan', 'grades': [19, 48, 86, 45, 32]}))
+
+
+# ФУНКЦИЯ cyclic_shift()
+
+# from collections import deque
+#
+#
+# def cyclic_shift(numbers: list[int | float], step: int) -> None:
+#     new_numbers = deque(numbers)
+#     new_numbers.rotate(step)
+#     numbers[:] = [i for i in new_numbers]
+#
+#
+# numbers = [1, 2, 3, 4, 5]
+# cyclic_shift(numbers, 1)
+#
+# print(numbers)
+# OR
+# def cyclic_shift(numbers: list[int | float], step: int) -> None:
+#     if step >= 0:
+#         for i in range(step):
+#             c = numbers.pop()
+#             numbers.insert(0, c)
+#     elif step < 0:
+#         for i in range(abs(step)):
+#             c = numbers.pop(0)
+#             numbers.append(c)
+#
+#
+# numbers = [1, 2, 3, 4, 5]
+# cyclic_shift(numbers, -2)
+#
+# print(numbers)
+
+#
+# ФУНКЦИЯ matrix_to_dict()
+
+# def matrix_to_dict(matrix: list[list[int | float]]) -> dict[int, list[int | float]]:
+#     res = {k: v for k, v in enumerate(matrix, 1)}
+#     return res
+#
+# matrix = [[5, 6, 7], [8, 3, 2], [4, 9, 8]]
+#
+#
+# print(*matrix_to_dict.__annotations__.values())
+
+
+# ДЕКОРАТОР sandwich
+
+# def sandwich(func):
+#     first = '---- Верхний ломтик хлеба ----'
+#     second = '---- Нижний ломтик хлеба ----'
+#     print(first)
+#     def wrapper(*args, **kwargs):
+#         res = func(*args, **kwargs)
+#         print(second)
+#         return res
+#
+#     return wrapper
+#
+# OR
+#
+# def sandwich(func):
+#     def wrapper(*args, **kwargs):
+#         print('---- Верхний ломтик хлеба ----')
+#         result = func(*args, **kwargs)
+#         print('---- Нижний ломтик хлеба ----')
+#         return result
+#     return wrapper
+#
+# @sandwich
+# def add_ingredients(ingredients):
+#     print(' | '.join(ingredients))
+#
+#
+# add_ingredients(['томат', 'салат', 'сыр', 'бекон'])
+
+
+# НОВЫЙ print
+
+# def decorator_print(func):
+#     def wrapper(*args, **kwargs):
+#         args = [str(i).upper() for i in args]
+#         kwargs = {k: v.upper() for k, v in kwargs.items()}
+#         return func(*args, **kwargs)
+#
+#     return wrapper
+#
+#
+# print = decorator_print(print)
+#
+# print('hi', 'there', 2, end='12')
+# OR
+# def decorator(func):
+#     def wrapper(*args, sep=' ', end='\n'):
+#         args = (i.upper() if isinstance(i, str) else i for i in args)
+#         return func(*args, sep=sep.upper(), end=end.upper())
+#     return wrapper
+#
+# print = decorator(print)
+
+
+# ДЕКОРАТОР do_twice
+
+# def do_twice(func):
+#     def wrapper(*args, **kwargs):
+#         res = func(*args, **kwargs)
+#         res = func(*args, **kwargs)
+#
+#         return res
+#
+#     return wrapper
+#
+#
+# @do_twice
+# def beegeek():
+#     print('beegeek')
+#
+#
+# print(beegeek())
+
+
+# ФУНКЦИЯ reverse_args
+
+# def reverse_args(func):
+#     def wrapper(*args, **kwargs):
+#         # args = [i for i in args[::-1]]
+#         args = reversed(args)
+#         res = func(*args, **kwargs)
+#         return res
+#
+#     return wrapper
+#
+#
+# @reverse_args
+# def concat(a, b, c):
+#     return a + b + c
+#
+#
+# print(concat('apple', 'cherry', 'melon'))
+
+
+# ФУНКЦИЯ exception_decorator
+
+# def exception_decorator(func):
+#     def wrapper(*args, **kwargs):
+#         try:
+#             res = func(*args, **kwargs)
+#             return res, 'Функция выполнилась без ошибок'
+#         except:
+#             return None, 'При вызове функции произошла ошибка'
+#
+#     return wrapper
+#
+#
+# sum = exception_decorator(sum)
+#
+# print(sum(['199', '1', 187]))
+
+
+# ФУНКЦИЯ takes_positive
+
+# def takes_positive(func):
+#     def wrapper(*args, **kwargs):
+#         kwargs_ = [isinstance(v, int) for v in kwargs.values()]
+#         args_ = [isinstance(i, int) for i in args]
+#
+#         args_plus = [i for i in args if i <= 0]
+#         kwargs_plus = [v for v in kwargs.values() if v <= 0]
+#
+#         if all(args_) is False:
+#             raise TypeError
+#         elif args_plus:
+#             raise ValueError
+#
+#         if len(kwargs) == 0:
+#             res = func(*args, **kwargs)
+#             return res
+#
+#         elif all(kwargs_) is False:
+#             raise TypeError
+#         elif kwargs_plus:
+#             raise ValueError
+#         res = func(*args, **kwargs)
+#         return res
+#
+#     return wrapper
+#
+#
+# @takes_positive
+# def positive_sum(*args):
+#     return sum(args)
+#
+#
+# try:
+#     print(positive_sum(11, 20.7, 10))
+# except Exception as err:
+#     print(type(err))
+# OR
+# def takes_positive(func):
+#     def dec(*args, **kwargs):
+#         for i in [*kwargs.values()] + [*args]:
+#             if not isinstance(i, int):
+#                 return TypeError
+#             elif i < 1:
+#                 return ValueError
+#         return func(*args, **kwargs)
+#     return dec
+
+
+# ДЕКОРАТОР square
+
+# import functools
+#
+#
+# def square(func):
+#     @functools.wraps(func)
+#     def wrapper(*args, **kwargs):
+#         res = func(*args, **kwargs) ** 2
+#         return res
+#
+#     return wrapper
+#
+#
+# @square
+# def add(a, b):
+#     '''прекрасная функция'''
+#     return a + b
+#
+#
+# print(add(1, 1))
+# print(add.__name__)
+# print(add.__doc__)
+
+
+# ДЕКОРАТОР returns_string
+
+# from functools import wraps
+#
+#
+# def returns_string(func):
+#     @wraps(func)
+#     def wrapper(*args, **kwargs):
+#         res = func(*args, **kwargs)
+#         if not isinstance(res, str):
+#             raise TypeError
+#         return res
+#
+#     return wrapper
+#
+#
+# @returns_string
+# def add(a, b):
+#     return a + b
+#
+# try:
+#     print(add(3, 7))
+# except TypeError as e:
+#     print(type(e))
+
+
+# ДЕКОРАТОР trace
+
+# from functools import wraps
+#
+#
+# def trace(func):
+#     @wraps(func)
+#     def wrapper(*args, **kwargs):
+#         print(f'TRACE: вызов {func.__name__}() с аргументами: {args}, {kwargs}')
+#         print(f'TRACE: возвращаемое значение {func.__name__}(): {repr(func(*args, **kwargs))}')
+#         return func(*args, **kwargs)
+#
+#     return wrapper
+#
+#
+# @trace
+# def add(a, b, c):
+#     '''docs'''
+#     return a + b + c
+#
+#
+# print(add(1, 2, 3))
+# print(add.__name__)
+# print(add.__doc__)
+
+
+# ДЕКОРАТОР prefix
+
+# import functools
+#
+#
+# def prefix(string: str, to_the_end: bool = False):
+#     def decorator(func):
+#         @functools.wraps(func)
+#         def wrapper(*args, **kwargs):
+#             val = func(*args, **kwargs)
+#             if to_the_end:
+#                 return val + string
+#             return string + val
+#         return wrapper
+#     return decorator
+#
+#
+# @prefix('$$$', to_the_end=True)
+# def get_bonus():
+#     return '2000'
+#
+#
+# print(get_bonus())
+
+
+# ДЕКОРАТОР make_html
+
+# from functools import wraps
+#
+#
+# def make_html(tag: str):
+#     def decorator(func):
+#         @wraps(func)
+#         def wrapper(*args, **kwargs):
+#             return f'<{tag}>{func(*args, **kwargs)}</{tag}>'
+#
+#         return wrapper
+#
+#     return decorator
+#
+# @make_html('i')
+# @make_html('del')
+# def get_text(text):
+#     return text
+#
+#
+# print(get_text('Python'))
+
+
+# ДЕКОРАТОР repeat
+
+# from functools import wraps
+#
+#
+# def repeat(times: int):
+#     def decorator(func):
+#         @wraps(func)
+#         def wrapper(*args, **kwargs):
+#             for _ in range(times):
+#                 val = func(*args, **kwargs)
+#             return val
+#
+#         return wrapper
+#
+#     return decorator
+#
+#
+# @repeat(4)
+# def say_beegeek():
+#     '''documentation'''
+#     print('beegeek')
+#
+#
+# print(say_beegeek.__name__)
+# print(say_beegeek.__doc__)
+
+
+# ДЕКОРАТОР srip_range
+
+# from functools import wraps
+#
+#
+# def strip_range(start: int, end: int, char: str = '.'):
+#     def decorator(func):
+#         @wraps(func)
+#         def wrapper(*args, **kwargs):
+#             val = func(*args, **kwargs)
+#             return val[:start] + char * (min(end, len(val)) - start) + val[end + 1:]
+#             # OR
+#             # val = [char if start <= i < end else j for i, j in enumerate(val)]
+#             # return ''.join(val)
+#         return wrapper
+#
+#     return decorator
+#
+#
+# @strip_range(3, 20, '_')
+# def beegeek():
+#     return 'beegeek'
+#
+#
+# print(beegeek())
+
+
+# ДЕКОРАТОР returns
+
+# from functools import wraps
+#
+#
+# def returns(check_type):
+#     def decorator(func):
+#         @wraps(func)
+#         def wrapper(*args, **kwargs):
+#             val = func(*args, **kwargs)
+#             if isinstance(val, check_type):
+#                 return val
+#             raise TypeError
+#
+#         return wrapper
+#
+#     return decorator
+#
+#
+# @returns(int)
+# def add(a, b):
+#     return a + b
+#
+#
+# try:
+#     print(add('199', '1'))
+# except TypeError as e:
+#     print(type(e))
+
+
+# ДЕКОРАТОР takes
+
+# from functools import wraps
+#
+#
+# def takes(*args_type):
+#     def decorator(func):
+#         @wraps(func)
+#         def wrapper(*args, **kwargs):
+#             over = list(kwargs.values()) + list(args)
+#             flag = [True if isinstance(i, args_type) else False for i in over]
+#             if not all(flag):
+#                 raise TypeError
+#             return func(*args, **kwargs)
+#
+#
+#         return wrapper
+#
+#     return decorator
+#
+#
+# @takes(int, str)
+# def repeat_string(string, times):
+#     return string * times
+#
+# print(repeat_string('bee', 3))
+
+
+# ДЕКОРАТОР add_attrs
+
+# def add_attrs(**kwargs_add):
+#     def decorator(func):
+#         func.__dict__.update(kwargs_add)
+#         return func
+#
+#     return decorator
+#
+#
+# @add_attrs(at1=10, at2=20, at3=30, at4=40, atf=50)
+# def add(a, b):
+#     '''add docs'''
+#     return a + b
+#
+#
+# print(add.at1)
+# print(add.at2)
+# print(add.at3)
+# print(add.__name__)
+# print(add.__doc__)
+# print(add(1, 2))
+# print(add(b=12, a=13))
+# print(add.at4)
+# print(add.atf)
+
+
+# ДЕКОРАТОР ignore_exception
+
+# from functools import wraps
+#
+#
+# def ignore_exception(*args_type):
+#     def decorator(func):
+#         @wraps(func)
+#         def wrapper(*args, **kwargs):
+#             try:
+#                 return func(*args, **kwargs)
+#             except args_type as e:
+#                 print(f'Исключение {e.__class__.__name__} обработано')
+#
+#         return wrapper
+#
+#     return decorator
+#
+#
+# @ignore_exception()
+# def func():
+#     '''func docs'''
+#     raise ValueError
+#
+#
+# try:
+#     func()
+# except Exception as e:
+#     print(type(e))
+
+
+# ДЕКОРАТОР retry
+
+# from functools import wraps
+#
+#
+# class MaxRetriesException(Exception):
+#     pass
+#
+#
+# def retry(times):
+#     def decorator(func):
+#         @wraps(func)
+#         def wrapper(*args, **kwargs):
+#             for _ in range(times):
+#                 try:
+#                     return func(*args, **kwargs)
+#                 except:
+#                     pass
+#
+#             raise MaxRetriesException
+#
+#         return wrapper
+#
+#     return decorator
+#
+#
+# @retry(3)
+# def no_way():
+#     raise ValueError
+#
+#
+# try:
+#     no_way()
+# except Exception as e:
+#     print(type(e))
+
+
+# ДВЕ ФУНКЦИИ
+
+# from functools import partial
+#
+# name = 'Тимур'
+# email_address = 'timyrik20@beegeek.ru'
+# text = 'Школа BEEGEEK приглашает Вас на новый курс по программированию на языке Python. тутут....'
+#
+#
+# def send_email(name, email_address, text):
+#     return f'В письме для {name} на адрес {email_address} сказано следующее: {text}'
+#
+#
+# to_Timur = partial(send_email, name, email_address)
+# send_an_invitation = partial(send_email, text=text)
+#
+# print(send_an_invitation("Тимур", "timyrik20@beegeek.ru"))
+
+
+# ПРОСТО ДИМА 🙂
+
+# import sys
+# from functools import lru_cache
+#
+#
+# @lru_cache()
+# def words(word):
+#     return ''.join(sorted(word))
+#
+#
+# check_words = [i.strip() for i in sys.stdin]
+# for i in check_words:
+#     print(words(i))
+
+
+# ПРОСТО ДИМА 🙃
+
+# from functools import lru_cache
+#
+#
+# @lru_cache()
+# def ways(num):
+#     if num == 1:
+#         return 1
+#     elif num == 0:
+#         return 0
+#
+#     if num > 4:
+#         return ways(num - 1) + ways(num - 3) + ways(num - 4)
+#     elif num > 3:
+#         return ways(num - 1) + ways(num - 3)
+#     elif num > 1:
+#         return ways(num - 1)
+#
+#
+# print(ways(50))
+
+
+# EPISODE 10 ^_^
+# ______________
