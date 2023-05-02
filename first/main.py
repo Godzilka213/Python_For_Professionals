@@ -4765,8 +4765,1427 @@
 #         return ways(num - 1)
 #
 #
-# print(ways(50))
+# print(ways(45))
 
 
 # EPISODE 10 ^_^
 # ______________
+
+
+# 10.1.1
+
+# numbers = [100, 70, 34, 45, 30, 83, 12, 83, -28, 49, -8, -2, 6, 62, 64, -22, -19, 61, 13, 5, 80, -17, 7, 3, 21, 73, 88,
+#            -11, 16, -22]
+# num = iter(numbers)
+# for _ in range(3):
+#     next(num)
+# print(next(num))
+
+
+# 10.1.2
+
+# numbers = [100, 70, 34, 45, 30, 83, 12, 83, -28, 49, -8, -2, 6, 62, 64, -22, -19, 61, 13, 5, 80, -17, 7, 3, 21, 73, 88,
+#            -11, 16, -22]
+# num = reversed(numbers)
+# print(next(num))
+
+
+# ФУНКЦИЯ filterfalse()
+
+# def filterfalse(func, objects):
+#     if func is None:
+#         func = bool
+#     return filter(lambda x: not func(x), objects)
+#
+#
+# numbers = (1, 2, 3, 4, 5)
+#
+# print(*filterfalse(lambda x: x % 2 == 0, numbers))
+
+
+# ФУНКЦИЯ transpose()
+
+# def transpose(mat):
+#     return list(map(list, zip(*mat)))
+#
+#
+# matrix = [[1, 2, 3],
+#           [4, 5, 6],
+#           [7, 8, 9]]
+#
+# for row in transpose(matrix):
+#     print(row)
+
+
+# ФУНКЦИЯ get_min_max() 😎
+
+# def get_min_max(data):
+#     if data:
+#         return data.index(min(data)), data.index(max(data))
+#
+#
+# data = []
+#
+# print(get_min_max(data))
+
+
+# ФУНКЦИЯ get_min_max() 😳
+
+# import copy
+#
+#
+# def get_min_max(iterable):
+#     try:
+#         iterable_new = copy.deepcopy(iterable)
+#         return min(iterable), max(iterable_new)
+#     except Exception:
+#         return None
+#
+#
+# iterable = iter([])
+#
+# print(get_min_max(iterable))
+
+
+# ФУНКЦИЯ starmap()
+
+# def starmap(func, iterable):
+#     return map(lambda x: func(*x), iterable)
+#
+#
+# pairs = [(1, 3), (2, 5), (6, 4)]
+#
+# print(*starmap(lambda a, b: a + b, pairs))
+
+
+# 10.3.1
+
+# infinite_love = iter(lambda : 'i love beegeek!', 1)
+# print(next(infinite_love))
+
+
+# ФУНКЦИЯ is_iterable()
+
+# def is_iterable(obj):
+#     # return '__iter__' in dir(obj)
+#     # OR
+#     try:
+#         if iter(obj):
+#             return True
+#     except TypeError:
+#         return False
+#
+#
+# objects = [(1, 13), 7.0004, [1, 2, 3]]
+#
+# for obj in objects:
+#     print(is_iterable(obj))
+
+
+# ФУНКЦИЯ is_iterator()
+
+# def is_iterator(obj):
+#     return hasattr(obj, '__next__')
+#
+# beegeek = map(str.upper, 'beegeek')
+#
+# print(is_iterator(beegeek))
+
+
+# ФУНКЦИЯ random_numbers()
+
+# from random import randint
+#
+#
+# def random_numbers(left, right):
+#     return iter(lambda: randint(left, right), 0)
+#
+#
+# iterator = random_numbers(1, 10)
+#
+# print(next(iterator) in range(1, 11))
+# print(next(iterator) in range(1, 11))
+# print(next(iterator) in range(1, 11))
+
+
+# ИТЕРАТОР Repeater
+
+# class Repeater:
+#     def __init__(self, obj):
+#         self.obj = obj
+#
+#     def __iter__(self):
+#         return self
+#
+#     def __next__(self):
+#         return self.obj
+#
+#
+# bee = Repeater('bee')
+#
+# print(next(bee))
+
+
+# ИТЕРАТОР BoundedRepeater
+
+# class BoundedRepeater:
+#     def __init__(self, obj, times):
+#         self.obj = obj
+#         self.times = times
+#         self.counter = 0
+#
+#     def __iter__(self):
+#         return self
+#
+#     def __next__(self):
+#         self.counter += 1
+#         if self.counter <= self.times:
+#             return self.obj
+#         else:
+#             raise StopIteration('Error')
+#
+#
+# geek = BoundedRepeater('geek', 3)
+#
+# print(next(geek))
+# print(next(geek))
+# print(next(geek))
+#
+# try:
+#     print(next(geek))
+# except StopIteration:
+#     print('Error')
+
+
+# ИТЕРАТОР Square
+
+# class Square:
+#     def __init__(self, num):
+#         self.num = num
+#         self.start = 0
+#
+#     def __iter__(self):
+#         return self
+#
+#     def __next__(self):
+#         if self.start < self.num:
+#             self.start += 1
+#             return self.start ** 2
+#         else:
+#             raise StopIteration
+#
+#
+# squares = Square(10)
+#
+# print(list(squares))
+
+
+# ИТЕРАТОР Fibonacci
+
+# class Fibonacci:
+#     def __init__(self):
+#         self.fib_1 = 0
+#         self.fib_2 = 1
+#     def __iter__(self):
+#         return self
+#     def __next__(self):
+#         self.fib_1, self.fib_2 = self.fib_2, self.fib_1 + self.fib_2
+#         return self.fib_1
+#
+#
+# fibonacci = Fibonacci()
+#
+# print(next(fibonacci))
+# print(next(fibonacci))
+# print(next(fibonacci))
+# print(next(fibonacci))
+
+
+# ИТЕРАТОР PowerOf
+
+# class PowerOf:
+#     def __init__(self, num):
+#         self.num = num
+#         self.power = -1
+#
+#     def __iter__(self):
+#         return self
+#
+#     def __next__(self):
+#         self.power += 1
+#         return self.num**self.power
+#
+#
+# power_of_two = PowerOf(3)
+#
+# for _ in range(10):
+#     print(next(power_of_two))
+
+
+# ИТЕРАТОР DictItemsIterator
+
+# class DictItemsIterator:
+#     def __init__(self, data: dict):
+#         self.data = data
+#         self.key = list(data)
+#
+#     def __iter__(self):
+#         return self
+#
+#     def __next__(self):
+#         if len(self.key):
+#             k = self.key[0]
+#             v = self.data[self.key[0]]
+#             del self.key[0]
+#             return k, v
+#         else:
+#             raise StopIteration
+#
+# data = {1: 1, 2: 4, 3: 9, 4: 16, 5: 25, 6: 36, 7: 49}
+#
+# pairs = DictItemsIterator(data)
+#
+# print(*pairs)
+
+
+# ИТЕРАТОР CardDeck
+
+# class CardDeck:
+#     def __init__(self):
+#         self.suit = ("пик", "треф", "бубен", "червей")
+#         self.nominal = ("2", "3", "4", "5", "6", "7", "8", "9", "10", "валет", "дама", "король", "туз")
+#         self.counter = 0
+#         self.suit_counter = 0
+#         self.res = []
+#         for i in range(52):
+#             if self.counter == len(self.nominal):
+#                 self.suit_counter += 1
+#                 self.counter = 0
+#             res_add = f'{self.nominal[self.counter]} {self.suit[self.suit_counter]}'
+#             self.counter += 1
+#             self.res.append(res_add)
+#         self.answer = iter(self.res)
+#     def __iter__(self):
+#         return self
+#
+#     def __next__(self):
+#         return self.answer.__next__()
+#
+#
+# cards = list(CardDeck())
+#
+# print(cards[9])
+# print(cards[23])
+# print(cards[37])
+# print(cards[51])
+# # OR
+# class CardDeck:
+#     def __init__(self):
+#         self.suits = ("пик", "треф", "бубен", "червей")
+#         self.values = ("2", "3", "4", "5", "6", "7", "8", "9", "10", "валет", "дама", "король", "туз")
+#         self.count = -1
+#
+#     def __iter__(self):
+#         return self
+#
+#     def __next__(self):
+#         if self.count <= 50:
+#             self.count += 1
+#             # С помощью % узнаем какой values взять, а с помощью // узнаем какую масть берем
+#             return f"{self.values[self.count % 13]} {self.suits[self.count // 13]}"
+#         else:
+#             raise StopIteration
+
+
+# ИТЕРАТОР Cycle
+
+# class Cycle:
+#     def __init__(self, data):
+#         self.data = data
+#         self.counter = -1
+#
+#     def __iter__(self):
+#         return self
+#
+#     def __next__(self):
+#         self.counter += 1
+#         if self.counter == len(self.data):
+#             self.counter = 0
+#         return self.data[self.counter]
+#
+#
+# cycle = Cycle(range(100_000_000))
+#
+# print(next(cycle))
+# print(next(cycle))
+
+
+# ИТЕРАТОР RandomNumbers
+
+# from random import randint
+#
+#
+# class RandomNumbers:
+#
+#     def __init__(self, left, right, n):
+#         self.right = right
+#         self.left = left
+#         self.n = n
+#
+#
+#     def __iter__(self):
+#         return self
+#
+#     def __next__(self):
+#         if self.n == 0:
+#             raise StopIteration
+#         self.n -= 1
+#         return randint(self.left, self.right)
+#
+# iterator = RandomNumbers(1, 10, 2)
+#
+# print(next(iterator) in range(1, 11))
+# print(next(iterator) in range(1, 11))
+
+
+# ИТЕРАТОР Alphabet 🌶️
+
+# class Alphabet:
+#     def __init__(self, keyboard):
+#         self.keyboard = keyboard
+#         self.en_ru = {'ru': [chr(i) for i in range(1072, 1104)], 'en': [chr(i) for i in range(97, 97 + 26)]}
+#         self.keyboard_iter = iter(self.en_ru[self.keyboard])
+#
+#     def __iter__(self):
+#         return self
+#
+#     def __next__(self):
+#         try:
+#             return next(self.keyboard_iter)
+#         except StopIteration:
+#             self.keyboard_iter = iter(self.en_ru[self.keyboard])
+#             return next(self.keyboard_iter)
+#
+#
+# en_alpha = Alphabet('en')
+#
+# letters = [next(en_alpha) for _ in range(28)]
+#
+# print(*letters)
+
+
+# ИТЕРАТОР Xrange 🌶️
+
+# class Xrange:
+#     def __init__(self, start: int | float, end: int | float, step: int | float = 1):
+#         self.start = start - step
+#         self.end = end
+#         self.step = step
+#
+#     def __iter__(self):
+#         return self
+#
+#     def __next__(self):
+#         self.start += self.step
+#         if self.step > 0 and self.start >= self.end:
+#             raise StopIteration
+#         if self.step < 0 and self.start <= self.end:
+#             raise StopIteration
+#         return self.start
+#
+#
+# xrange = Xrange(10, 1, -1)
+#
+# print(*xrange)
+
+
+# ФУНКЦИЯ simple_sequence()
+
+# def simple_sequence():
+#     start = 1
+#     while True:
+#         for i in range(1, start + 1):
+#             yield start
+#         start += 1
+#
+#
+# generator = simple_sequence()
+# numbers = [next(generator) for _ in range(10)]
+# print(*numbers)
+
+
+# ФУНКЦИЯ alternating_sequence()
+
+# def alternating_sequence(count=None):
+#     if count == None:
+#         start = 0
+#         while True:
+#             start += 1
+#             if start % 2 != 0:
+#                 yield start
+#             else:
+#                 yield start * -1
+#     if count != None:
+#         start = 0
+#         while start != count:
+#             start += 1
+#             if start % 2 != 0:
+#                 yield start
+#             else:
+#                 yield start * -1
+#
+#
+# generator = alternating_sequence(10)
+#
+# print(*generator)
+
+
+# ФУНКЦИЯ primes()
+
+# def primes(left, right):
+#     for i in range(left, right + 1):
+#         flag = True
+#         for j in range(2, i):
+#             if i % j == 0:
+#                 flag = False
+#         if flag == True and i != 1:
+#             yield (i)
+#
+#
+# generator = primes(1, 15)
+#
+# print(*generator)
+
+
+# ФУНКЦИЯ reverse()
+
+# def reverse(sequence):
+#     for i in sequence[::-1]:
+#         yield i
+#
+# generator = reverse('beegeek')
+#
+# print(type(generator))
+# print(*generator)
+
+
+# ФУНКЦИЯ dates()
+
+# from datetime import date, timedelta
+# from sys import getsizeof
+#
+#
+# def dates(start: date, count=None):
+#     step = 0
+#     try:
+#         while step != count:
+#             yield start
+#             start += timedelta(days=1)
+#             step += 1
+#     except OverflowError:
+#         return None
+
+
+# OR
+# def dates(start, count=None):
+#     count = count or (date.max - start).days + 1
+#     for i in range(count):
+#         yield start + timedelta(days=i)
+
+
+# generator = dates(date(9999, 1, 7))
+#
+# for _ in range(348):
+#     next(generator)
+#
+# print(next(generator))
+# print(next(generator))
+# print(next(generator))
+# print(next(generator))
+# print(next(generator))
+# print(next(generator))
+# print(next(generator))
+# print(next(generator))
+# print(next(generator))
+# print(next(generator))
+# print(next(generator))
+#
+# try:
+#     print(next(generator))
+# except StopIteration:
+#     print('Error')
+# print(getsizeof(generator))
+
+# ФУНКЦИЯ card_deck()
+
+# from sys import getsizeof
+#
+#
+# def card_deck(suit_del: str):
+#     nominal = ("2", "3", "4", "5", "6", "7", "8", "9", "10", "валет", "дама", "король", "туз")
+#     suit = ["пик", "треф", "бубен", "червей"]
+#     suit.remove(suit_del)
+#     while True:
+#         for i in suit:
+#             for j in nominal:
+#                 yield f'{j} {i}'
+#
+#
+# generator = card_deck('треф')
+# cards = [next(generator) for _ in range(40)]
+#
+# print(*cards)
+#
+# print('Размер итератора {generator}:', getsizeof(generator))
+# print('Размер списка {cards}:', getsizeof(cards))
+
+
+# ФУНКЦИЯ matrix_by_elem()
+
+# def matrix_by_elem(matrix):
+#     for row in matrix:
+#         yield from row
+#
+#
+# matrix = [[1, 2, 3],
+#           [4, 5, 6],
+#           [7, 8, 9]]
+#
+# print(*matrix_by_elem(matrix))
+
+
+# ФУНКЦИЯ
+
+# def palindromes():
+#     step = 1
+#     while True:
+#         if str(step) == str(step)[::-1]:
+#             yield step
+#         step += 1
+#
+#
+# generator = palindromes()
+# numbers = [next(generator) for _ in range(30)]
+#
+# print(*numbers)
+
+
+# ФУНКЦИЯ flatten()
+
+# def flatten(sequence):
+#     for i in sequence:
+#         if isinstance(i, list):
+#             yield from flatten(i)
+#         else:
+#             yield i
+# OR
+# def flatten(nested_list):
+#     for item in nested_list:
+#         yield from [item] if isinstance(item, int) else flatten(item)
+#
+#
+# generator = flatten([[1, 2], [[3]], [[4], 5]])
+#
+# print(*generator)
+
+
+# ФУНКЦИЯ cubes_of_odds
+
+# def cubes_of_odds(iterable):
+#     return (num ** 3 for num in iterable if num % 2)
+#
+#
+# print(*cubes_of_odds([1, 2, 3, 4, 5]))
+
+
+# ФУНКЦИЯ is_prime
+
+# def is_prime(num):
+#     check = (False if num % i == 0 else True for i in range(2, num))
+#     return [True, False][(not all(check) or num == 1)]
+#     # OR
+#     # if not all(check) or num == 1:
+#     #     return False
+#     # return True
+#
+# print(is_prime(8))
+
+
+# ФУНКЦИЯ count_iterable()
+
+# def count_iterable(sequence: list | tuple | str) -> int:
+#     return sum(1 for _ in sequence)
+#
+# print(count_iterable([1, 2, 3, 4, 5]))
+
+
+# ФУНКЦИЯ all_together()
+
+# def all_together(*args):
+#     for i in args:
+#         yield from i
+#
+#
+# objects = [range(3), 'bee', [1, 3, 5], (2, 4, 6)]
+#
+# print(*all_together(*objects))
+
+
+# ФУНКЦИЯ interleave()
+
+# def interleave(*args):
+#     return (i for j in zip(*args) for i in j)
+#
+#
+# print(*interleave('bee', '123'))
+
+
+# 10.7.1
+
+# from collections import namedtuple
+#
+# Person = namedtuple('Person', ['name', 'nationality', 'sex', 'birth', 'death'])
+#
+# persons = [Person('E. M. Ashe', 'American', 'male', 1867, 1941),
+#            Person('Goran Aslin', 'Swedish', 'male', 1980, 0),
+#            Person('Erik Gunnar Asplund', 'Swedish', 'male', 1885, 1940),
+#            Person('Genevieve Asse', 'French', 'female', 1949, 0),
+#            Person('Irene Adler', 'Swedish', 'female', 2005, 0),
+#            Person('Sergio Asti', 'Italian', 'male', 1926, 0),
+#            Person('Olof Backman', 'Swedish', 'male', 1999, 0),
+#            Person('Alyson Hannigan', 'Swedish', 'female', 1940, 1987),
+#            Person('Dana Atchley', 'American', 'female', 1941, 2000),
+#            Person('Monika Andersson', 'Swedish', 'female', 1957, 0),
+#            Person('Shura_Stone', 'Russian', 'male', 2000, 0),
+#            Person('Jon Bale', 'Swedish', 'male', 2000, 0)]
+#
+# filter_persons = filter(lambda x: x.nationality == 'Swedish' and x.sex == 'male', persons)
+# who_lives = filter(lambda x: x.death == 0, filter_persons)
+# print(max(who_lives, key= lambda x: x.birth).name)
+
+
+# ФУНКЦИЯ parse_ranges()
+
+# def parse_ranges(range_):
+#     make_num_for_gen = (int(i) for i in range_.replace(',', '-').split('-'))
+#     gen_range = (range(f, next(make_num_for_gen) + 1) for f in make_num_for_gen)
+#     return (i for j in gen_range for i in j)
+#     # OR
+#     # for i in gen_range:
+#     #     for j in i:
+#     #         yield j
+#
+# print(*parse_ranges('1-2,4-4,8-10'))
+# OR
+# def parse_ranges(ranges):
+#     return (j
+#             for i in ranges.split(',')
+#             for a, b in [i.split('-')]
+#             for j in range(int(a), int(b) + 1))
+
+
+# ФУНКЦИЯ filter_names()
+
+# def filter_names(iterable, symbol, maximum):
+#     name = (i for i in iterable if i.lower()[0] != symbol.lower() and i.isalpha())
+#     for id, person in enumerate(name, 1):
+#         if maximum + 1 == id:
+#             break
+#         yield person
+#
+# data = ['Dima', 'Timur', 'Arthur', 'Anri20', 'Arina', 'German', 'Ruslan']
+#
+# print(*filter_names(data, 'D', 3))
+
+
+# ИНВЕСТИЦИИ
+
+# import csv
+#
+#
+# def value_csv():
+#     with open('data.csv', 'r', encoding='utf-8') as file:
+#         rows = csv.reader(file)
+#         next(rows)
+#         round_a = (int(n) for c, n, r in rows if r == 'a')
+#         return sum(round_a)
+#
+#
+# print(value_csv())
+
+
+# ФУНКЦИЯ years_days()
+
+# from datetime import date, timedelta
+
+
+# def years_days(start):
+# for i in range(9999 - start):
+#     data = date(start, 1, 1) + timedelta(days=i)
+#     if data.year != start:
+#         break
+#     yield data
+
+# dates = years_days(2077)
+
+# print(*dates)
+
+
+# ФУНКЦИЯ nonempty_lines()
+
+# def nonempty_lines(name_file):
+#     with open(name_file, 'r', encoding='utf-8') as file:
+#         return (
+#             i
+#             if len(i) <= 25
+#             else '...'
+#             for i in file.read().split()
+#         )
+#
+#
+# print(*nonempty_lines('file2.txt'))
+
+
+# ФУНКЦИ txt_to_dict()
+
+# def txt_to_dict():
+#     with open('planets.txt', 'r', encoding='utf-8') as file:
+#         file_lines = (line.split('\n') for line in file.read().split('\n\n'))
+#         res = (
+#             {j.split(' = ')[0]: j.split(' = ')[1] for j in i}
+#             for i in file_lines
+#         )
+#
+#         return res
+# OR
+# for i in file_lines:
+#     res = {}
+#     for j in i:
+#         j = j.split(' = ')
+#         res[j[0]] = j[1]
+#     yield res
+
+
+# planets = txt_to_dict()
+# print(*txt_to_dict())
+# print(next(planets))
+
+# ФУНКЦИЯ unique()
+
+# from collections import Counter
+# def unique(lst):
+#     check = Counter(lst)
+#     return (k for k in check)
+#
+#
+# numbers = [1, 2, 2, 3, 4, 5, 5, 5]
+#
+# print(*unique(numbers))
+
+# ФУНКЦИЯ stop_on()
+
+# def stop_on(iterable, obj):
+#     it = iter(iterable)
+#     return iter(lambda: next(it), obj)
+
+# numbers = [1, 2, 3, 4, 5]
+#
+# print(*stop_on(numbers, 3))
+
+# ФУНКЦИЯ with_previous()
+
+# from copy import copy
+#
+#
+# def with_previous(iterable):
+#     first = list(copy(iterable))
+#     if iterable:
+#         second = list(copy(first))
+#         second.insert(0, None)
+#         return zip(first, second)
+#     return []
+# OR
+# def with_previous(iterable):
+#     prev = None
+#     return ((i, prev, prev := i)[:-1] for i in iterable)
+
+# print(*with_previous(map(abs, range(-100, 100))))
+
+
+# ФУНКЦИЯ pairwise()
+
+# def pairwise(iterable):
+#     if iterable:
+#         iterable = iter(iterable)
+#         prev = next(iterable)
+#         for i in iterable:
+#             yield prev, i
+#             prev = i
+#         yield prev, None
+#     return []
+#
+# numbers = []
+# OR
+# def pairwise(iterable):
+#     it = iter(iterable)
+#     i = next(it, None)
+#     while i != None:
+#         i, prev = next(it, None), i
+#         yield prev, i
+#
+# print(*pairwise(numbers))
+
+
+# ФУНКЦИЯ around()
+
+# def around(iterable):
+#     if iterable:
+#         iterable = iter(iterable)
+#         prev = next(iterable)
+#         last = None
+#         for i in iterable:
+#             yield last, prev, i
+#             last = prev
+#             prev = i
+#         yield last, prev, None
+#     return []
+#
+#
+# numbers = [1, 2, 3, 4, 5]
+#
+# print(*around(numbers))
+
+# 10.8 ПРИМЕЧАНИЕ 2
+
+# import itertools as it
+# import time
+#
+# symbols = ['.', '-', "'", '"', "'", '-', '.', '_']
+#
+# for c in it.cycle(symbols):
+#     print(c, end='')
+#     time.sleep(0.05)
+# OR ^_^
+# import time
+#
+# symbols = ['.', '-', "'", '"', "'", '-', '.', '_']
+#
+# while True:
+#     symbols = '\r' + symbols.pop() + ''.join(symbols)
+#     print(symbols, end='')
+#     symbols = list(symbols)[1:]
+#     time.sleep(0.1)
+
+
+# ФУНКЦИЯ tabulate()
+
+# from itertools import count
+#
+#
+# def tabulate(func):
+#     return (func(i) for i in count(1))
+#
+#
+# func = lambda x: x
+# values = tabulate(func)
+#
+# print(next(values))
+# print(next(values))
+
+
+# ФУНКЦИЯ factorials
+
+# from itertools import accumulate
+# import operator
+#
+#
+# def factorials(num):
+#     return accumulate(range(1, num + 1), operator.mul)
+#
+#
+# numbers = factorials(6)
+#
+# print(*numbers)
+
+
+# ФУНКЦИЯ alnum_sequence()
+
+# from itertools import cycle
+# from string import ascii_uppercase
+#
+#
+# def alnum_sequence():
+#     return (j for i in zip(cycle(range(1, 27)), cycle(ascii_uppercase)) for j in i)
+# OR
+# for i in zip(cycle(range(1, 27)), cycle(ascii_uppercase)):
+#     for j in i:
+#         yield j
+
+
+# alnum = alnum_sequence()
+
+# print(*(next(alnum) for _ in range(55)))
+
+
+# ФУНКЦИЯ roundrobin() 🌶️
+
+# def roundrobin(*args):
+#     args = tuple(iter(i) for i in args)
+#     while True:
+#         stop = 0
+#         for i in args:
+#             try:
+#                 out = next(i)
+#                 yield out
+#             except Exception:
+#                 stop += 1
+#         if stop == len(args):
+#             break
+#
+#
+# print(*roundrobin('abc', 'd', 'ef'))
+
+
+# ФУНКЦИЯ drop_while_negative()
+
+# from itertools import dropwhile
+#
+#
+# def drop_while_negative(iterable):
+#     return dropwhile(lambda x: x < 1, iterable)
+#
+#
+# numbers = [-3, -2, -1, 0, 1, 2, 3]
+#
+# print(*drop_while_negative(numbers))
+
+
+# ФУНКЦИЯ drop_this()
+
+# from itertools import dropwhile
+#
+#
+# def drop_this(iterable, step):
+#     return dropwhile(lambda x: x == step, iterable)
+#
+#
+# numbers = [0, 0, 0, 1, 2, 3]
+
+# print(*drop_this(numbers, 0))
+
+
+# ФУНКЦИЯ first_true()
+
+# def first_true(iterable, pred):
+#     res = filter(pred, iterable)
+#     return next(res, None)
+#
+#
+# numbers = (0, 0, 0, 69, 1, 1, 1, 2, 4, 5, 6, 0, 10, 100, 200)
+# numbers_iter = filter(None, numbers)
+#
+# print(first_true(numbers_iter, lambda num: num < 0))
+
+
+# ФУНКЦИЯ take()
+
+# from itertools import islice
+#
+#
+# def take(iterable, n):
+#     return islice(iterable, n)
+#
+#
+# print(*take(range(10), 5))
+
+
+# ФУНКЦИЯ take_nth()
+
+# from itertools import islice
+#
+#
+# def take_nth(iterable, n):
+#     return next(islice(iterable, n - 1, n), None)
+#
+#
+# numbers = [11, 22, 33, 44, 55]
+#
+# print(take_nth(numbers, 3))
+
+
+# ФУНКЦИЯ first_largest()
+
+# def first_largest(iterable, n):
+#     for ind, i in enumerate(iterable):
+#         if i > n:
+#             return ind
+#     return -1
+#
+#
+# iterator = iter([18, 21, 14, 72, 73, 18, 20])
+#
+# print(first_largest(iterator, 10))
+# OR
+# from itertools import compress, count
+#
+# first_largest = lambda it, n: next(compress(count(), (i>n for i in it)), -1)
+
+
+# ФУНКЦИЯ sum_of_digits()
+
+# from itertools import chain
+#
+#
+# def sum_of_digits(iterable):
+#     num = (int(i) for i in chain.from_iterable(map(str, iterable)))
+#     return sum(num)
+#
+#
+#
+# print(sum_of_digits([13, 20, 41, 2, 2, 5]))
+
+
+# ФУНКЦИЯ is_rising()
+
+# from itertools import pairwise
+#
+#
+# def is_rising(iterable):
+#     res = pairwise(iterable)
+#     return all(map(lambda x: int(x[0]) < int(x[1]), res))
+#
+#
+# print(is_rising([1, 1, 3, 4, 5]))
+
+
+# ФУНКЦИЯ max_pair()
+
+# from itertools import pairwise, starmap
+
+
+# def max_pair(iterable):
+#     pair_wise = pairwise(iterable)
+#     res = max(starmap(lambda a, b: a + b, pair_wise))
+#     return res
+
+
+# OR
+# def max_pair(iterable):
+#     return max(map(sum, pairwise(iterable)))
+# print(max_pair([1, 8, 2, 4, 3]))
+
+
+# ФУНКЦИЯ ncycles()
+
+# from itertools import tee
+#
+#
+# def ncycles(iterables, times):
+#     iterables = tee(iterables, times)
+#     for i in iterables:
+#         yield from i
+#
+#
+# iterator = iter('bee')
+#
+# print(*ncycles(iterator, 4))
+
+
+# ФУНКЦИЯ grouper()
+
+# from itertools import zip_longest, repeat, chain
+#
+#
+# def grouper(iterable, n):
+#     it = chain(iterable)
+#     return zip_longest(*repeat(it, n))
+#
+#
+# numbers = [1, 2, 3, 4, 5, 6]
+#
+# print(*grouper(numbers, 2))
+
+
+# 10.11.1
+
+# from collections import namedtuple
+# from itertools import groupby
+#
+# Person = namedtuple('Person', ['name', 'age', 'height'])
+#
+# persons = [Person('Tim', 63, 193), Person('Eva', 47, 158),
+#            Person('Mark', 71, 172), Person('Alex', 45, 193),
+#            Person('Jeff', 63, 193), Person('Ryan', 41, 184),
+#            Person('Ariana', 28, 158), Person('Liam', 69, 193)]
+# # Сортируем по росту и алфавиту
+# persons = sorted(persons, key=lambda x: (x.height, x.name))
+# # Создаем объект groupby по росту
+# group = groupby(persons, key=lambda x: x.height)
+# # Выводим ключ(рост) и всех тех, кто находится внутри
+# for k, v in group:
+#     print(f'{k}: {", ".join((i.name for i in v))}')
+
+
+# 10.11.2
+
+# from collections import namedtuple
+# from itertools import groupby
+#
+# Student = namedtuple('Student', ['surname', 'name', 'grade'])
+#
+# students = [Student('Гагиев', 'Александр', 10), Student('Дедегкаев', 'Илья', 11), Student('Кодзаев', 'Георгий', 10),
+#             Student('Набокова', 'Алиса', 11), Student('Кораев', 'Артур', 10), Student('Шилин', 'Александр', 11),
+#             Student('Уртаева', 'Илина', 11), Student('Салбиев', 'Максим', 10), Student('Капустин', 'Илья', 11),
+#             Student('Гудцев', 'Таймураз', 11), Student('Перчиков', 'Максим', 10), Student('Чен', 'Илья', 11),
+#             Student('Елькина', 'Мария', 11), Student('Макоев', 'Руслан', 11), Student('Албегов', 'Хетаг', 11),
+#             Student('Щербак', 'Илья', 10), Student('Идрисов', 'Баграт', 11), Student('Гапбаев', 'Герман', 10),
+#             Student('Цивинская', 'Анна', 10), Student('Туткевич', 'Юрий', 11), Student('Мусиков', 'Андраник', 11),
+#             Student('Гадзиев', 'Георгий', 11), Student('Белов', 'Юрий', 11), Student('Акоева', 'Диана', 11),
+#             Student('Денисов', 'Илья', 11), Student('Букулова', 'Диана', 10), Student('Акоева', 'Лера', 11)]
+#
+# students_sorted = sorted(students, key=lambda x: x.name)
+# group = groupby(students_sorted, key=lambda x: x.name)
+# max_result = max(group, key=lambda tpl: sum(1 for i in tpl[1]))
+# print(max_result[0])
+
+
+# ГРУППЫ СЛОВ
+
+# from itertools import groupby
+#
+# txt = sorted(input().split(), key=lambda x: (len(x), x))
+# group = groupby(txt, key=lambda x: len(x))
+# for k, v in group:
+#     print(f'{k} -> {", ".join(v)}')
+# OR
+# for k, v in groupby(sorted(input().split(), key = len), key = len):
+#     print(f'{k} -> {", ".join(sorted(v))}')
+
+
+# НЕТ ДЕЛ
+
+# from itertools import groupby
+
+# from itertools import groupby
+#
+# tasks = [('Отдых', 'поспать днем', 3),
+#          ('Ответы на вопросы', 'ответить на вопросы в дискорде', 1),
+#          ('ЕГЭ Математика', 'доделать курс по параметрам', 1),
+#          ('Ответы на вопросы', 'ответить на вопросы в курсах', 2),
+#          ('Отдых', 'погулять вечером', 4),
+#          ('Курс по ооп', 'обсудить темы', 1),
+#          ('Урок по groupby', 'добавить задачи на программирование', 3),
+#          ('Урок по groupby', 'написать конспект', 1),
+#          ('Отдых', 'погулять днем', 2),
+#          ('Урок по groupby', 'добавить тестовые задачи', 2),
+#          ('Уборка', 'убраться в ванной', 2),
+#          ('Уборка', 'убраться в комнате', 1),
+#          ('Уборка', 'убраться на кухне', 3),
+#          ('Отдых', 'погулять утром', 1),
+#          ('Курс по ооп', 'обсудить задачи', 2)]
+# tasks = sorted(tasks, key=lambda x: (x[0], x[2]))
+# group = groupby(tasks, key=lambda x: x[0])
+# for k, v in group:
+#     print(f'{k}:')
+#     for i in v:
+#         print(f'    {i[2]}. {i[1]}')
+#     print()
+
+
+# ФУНКЦИЯ group_anagrams
+
+# from itertools import groupby
+#
+#
+# def group_anagrams(words):
+#     words = sorted(words, key=lambda x: sorted(x))
+#     for _, v in groupby(words, key=sorted):
+#         yield tuple(v)
+#
+#
+# groups = group_anagrams(['evil', 'father', 'live', 'levi', 'book', 'afther', 'boko'])
+#
+# print(*groups)
+
+
+# ФУНКЦИЯ ranges() 🌶️
+
+# from itertools import groupby
+
+
+# def ranges(numbers):
+#     # Если числа идут по порядку, то разница индекса и числа будет одинакова, в случае 1, 2, 3, 4 имеем разницу -1
+#     # В случае 7, 8 имеем разницу -3, ну и для 10 разница -4.
+#     # Группируем по разнице, значением будет итератор чисел которые удовлетворяют условию
+#     # (разница текущего и следующего = 1)
+#     group = groupby(numbers, key=lambda x: numbers.index(x) - x)
+#     res = []
+#     # из v достаем значения и добавляем кортежи в res
+#     for k, v in group:
+#         v = tuple(v)
+#         res.append((v[0], v[-1]))
+#     return res
+#
+#
+# numbers = [1, 2, 3, 4, 7, 8, 10]
+#
+# print(ranges(numbers))
+
+
+# ПЕРЕСТАНОВКИ
+
+# from itertools import permutations
+#
+# res = set(permutations(input()))
+# for i in sorted(res):
+#     print(*i, sep='')
+
+
+# 10.12.1
+
+# from itertools import combinations
+#
+# wallet = [100, 100, 50, 50, 50, 50, 20, 20, 20, 10, 10, 10, 10, 10, 5, 5, 1, 1, 1, 1, 1]
+# counter = 0
+# for i in range(len(wallet)):
+#     for j in set(combinations(wallet, i)):
+#         if sum(j) == 100:
+#             counter += 1
+# print(counter)
+
+
+# 10.12.2
+
+# from itertools import combinations_with_replacement
+#
+# wallet = [100, 50, 20, 10, 5]
+#
+# counter = 0
+# for i in range(21):
+#     for j in set(combinations_with_replacement(wallet, i)):
+#         if sum(j) == 100:
+#             counter += 1
+# print(counter)
+
+
+# ЗАДАЧА О РЮКЗАКЕ
+
+# from collections import namedtuple
+# import itertools
+#
+# Item = namedtuple('Item', ['name', 'mass', 'price'])
+#
+# items = [Item('Обручальное кольцо', 7, 49_000),
+#          Item('Мобильный телефон', 200, 110_000),
+#          Item('Ноутбук', 2000, 150_000),
+#          Item('Ручка Паркер', 20, 37_000),
+#          Item('Статуэтка Оскар', 4000, 28_000),
+#          Item('Наушники', 150, 11_000),
+#          Item('Гитара', 1500, 32_000),
+#          Item('Золотая монета', 8, 140_000),
+#          Item('Фотоаппарат', 720, 79_000),
+#          Item('Лимитированные кроссовки', 300, 80_000)]
+#
+# max_mass = int(input())
+# res = []
+# for i in range(1, len(items) + 1):
+#     s = itertools.combinations(items, i)
+#     res.append(list(s))
+# my_list = []
+# for i in res:
+#     for j in i:
+#         all_mass = 0
+#         for k in j:
+#             all_mass += k.mass
+#         if all_mass <= max_mass:
+#             my_list.append(j)
+# result = [0]
+# max_money = 0
+# for i in my_list:
+#     money = 0
+#     for j in i:
+#         money += j.price
+#     if money > max_money:
+#         max_money = money
+#         result[0] = i
+#
+# if result[0]:
+#     for i in result:
+#         for j in sorted(i, key=lambda x: x.name):
+#             print(j.name)
+# else:
+#     print('Рюкзак собрать не удастся')
+# OR
+# from collections import namedtuple
+# from itertools import combinations
+#
+# Item = namedtuple('Item', ['name', 'mass', 'price'])
+#
+# items = [Item('Обручальное кольцо', 7, 49_000),
+#          Item('Мобильный телефон', 200, 110_000),
+#          Item('Ноутбук', 2000, 150_000),
+#          Item('Ручка Паркер', 20, 37_000),
+#          Item('Статуэтка Оскар', 4000, 28_000),
+#          Item('Наушники', 150, 11_000),
+#          Item('Гитара', 1500, 32_000),
+#          Item('Золотая монета', 8, 140_000),
+#          Item('Фотоаппарат', 720, 79_000),
+#          Item('Лимитированные кроссовки', 300, 80_000)]
+#
+# max_mass = int(input())
+# price = 0
+# item = None
+# for i in range(1, len(items) + 1):
+#     for combinations_ in combinations(items, i):
+#         i_price = sum(item.price for item in combinations_)
+#         i_mass = sum(item.mass for item in combinations_)
+#         if i_price > price and i_mass <= max_mass:
+#             price = i_price
+#             item = combinations_
+# if item:
+#     for i in sorted(item):
+#         print(i.name)
+# else:
+#     print('Рюкзак собрать не удастся')
+
+
+# 10.12.1
+
+# from string import ascii_lowercase
+# from itertools import product
+#
+# letters = ascii_lowercase[:8]
+# digits = [1, 2, 3, 4, 5, 6, 7, 8]
+#
+# for spot in product(letters, digits):
+#     print(*spot,sep='', end=' ')
+
+
+# ФУНКЦИЯ password_gen
+
+# from itertools import product
+#
+#
+# def password_gen():
+#     for i in product(range(10), range(10), range(10)):
+#         yield f'{i[0]}{i[1]}{i[2]}'
+#
+#
+# passwords = password_gen()
+#
+# print(next(passwords))
+# print(next(passwords))
+# print(next(passwords))
+
+
+# СИСТЕМЫ СЧИСЛЕНИЯ
+
+# from itertools import product
+#
+# yo = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F']
+#
+# n, m = int(input()), int(input())
+# things = yo[:n]
+#
+# for i in product(things, repeat=m):
+#     print(''.join(i), end=' ')
