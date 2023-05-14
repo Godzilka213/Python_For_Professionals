@@ -6193,3 +6193,601 @@
 
 # EPISODE 11 ^_^
 # ______________
+
+
+# Я В АДУ?
+
+# from re import match
+#
+#
+# def is_phone_number(phone):
+#     groups = phone.split('-')
+#     if len(groups) == 5 or len(groups) == 4:
+#         chars = ''.join(groups)
+#         return all(c.isdigit() for c in chars)
+#     return False
+#
+#
+# def get_all_numbers(text):
+#     for c in range(len(text)):
+#         chunk = text[c:c + 15]
+#         if is_phone_number(chunk):
+#             if match('\d-\d{3}-\d{3}-\d{2}-\d{2}', chunk) and chunk.startswith('7'):
+#                 yield chunk
+#             if match('\d-\d{3}-\d{4}-\d{4}', chunk) and chunk.startswith('8'):
+#                 yield chunk
+#
+#
+# text = input()
+#
+# print(*get_all_numbers(text), sep='\n')
+# OR
+# def is_phone_number(phone):
+#     groups = phone.split('-')
+#     length = list(map(len, groups))
+#     if length not in ([1, 3, 3, 2, 2], [1, 3, 4, 4]):
+#         return False
+#     chars = ''.join(groups)
+#     is_digits = all(c.isdigit() for c in chars)
+#     if length == [1, 3, 3, 2, 2]:
+#         return is_digits and chars[0] == '7'
+#     return is_digits and chars[0] == '8'
+#
+#
+# def get_all_numbers(text):
+#     for c in range(len(text)):
+#         chunk = text[c:c + 15]
+#         if is_phone_number(chunk):
+#             yield chunk
+#
+#
+# string = input()
+# print(*get_all_numbers(string), sep='\n')
+
+
+# 11.1.1
+
+# regex = r'beegeek'
+
+
+# 11.1.2
+
+# regex = r'...\....'
+
+
+# 11.1.3
+
+# regex = r'1\d\d'
+
+
+# 11.1.4
+
+# regex = r'\d{3}-\d{3}-\d{4}'
+
+
+# 11.2.1
+
+# regex = r'ca[rtb]'
+
+
+# 11.2.2
+
+# regex = r'\d|[A-F]'
+
+
+# 11.2.3
+
+# regex = r'[a-zA-Z]\d{4}'
+
+
+# 11.2.4
+
+# regex = r'[a-z][0-9][a-z][A-Z][A-Z]'
+
+
+# 11.2.5
+
+# regex = r'[0-9][aeiouy][^bcDF][^\s][^AEIOUY][^.|,]'
+
+
+# 11.2.6
+
+# regex = r'[12|3][01|2][12|x][03|aA][xs|u][.|,]'
+
+
+# 11.2.7
+
+# regex = r'\+7\d{10}|\+7\(\d{3}\)\d{7}|\+7\(\d{3}\)-\d{3}-\d{2}-\d{2}|\+7 \d{3} \d{3} \d{2} \d{2}'
+
+
+# 11.2.8
+
+# regex = r'\d{2}\.\d{2}\.\d{4}|\d{2}/\d{2}/\d{4}|\d{4}\.\d{2}\.\d{2}|\d{4}/\d{2}/\d{2}'
+
+
+# 11.2.9
+
+# regex = r'[0-1]\d:[0-5]\d|2[0-3]:[0-5]\d'
+
+
+# 11.3.1
+
+# regex = r'[A-Z]{5}[0-9]{4}[A-Z]'
+
+
+# 11.3.2
+
+# regex = r'<!--.*?-->'
+
+
+# 11.3.3
+
+# regex = r'[a-z]{0,3}[0-9]{2,8}[A-Z]{3,}'
+
+
+# 11.3.4
+
+# regex = r'[A-Z]{1,2}\d[0-9A-Z]? \d[ABDEFGHJLNPQRSTUWXYZ]{2}'
+# OR
+# regex = r'[A-Z]{1,2}\d[\dA-Z]? \d[ABD-HJLNP-UW-Z]{2}'
+
+
+# 11.4.1
+
+# regex = r'\ba\b|\bA\b|\ban\b|\bAn\b'
+
+
+# 11.4.2
+
+# regex = r'\b[A-Z]+\b'
+
+
+# 11.4.3
+
+# regex = r'\b[A-Z]\w*\b'
+
+
+# 11.4.4
+
+# regex = r'.*\(.+\).*'
+
+
+# 11.4.5
+
+# regex = r'^\d{2,}[a-z]{0,}[A-Z]{0,}$'
+
+
+# 11.4.6
+
+# regex = r'^[a-zA-Z]*s$'
+
+
+# 11.4.7
+
+# regex = r'[a-zA-Z02468]{40}[13579\s]{5}'
+
+
+# 11.4.8
+
+# regex = r'^([MDE]r|Mr?s)\.[A-Za-z]+$'
+
+
+# 11.4.9
+
+# regex = r'^\d{1,2}[a-zA-Z]{3,}\.{0,3}$'
+
+
+# 11.5.1
+
+# regex = r'\d{5}(-\d{4})?'
+
+
+# 11.5.2
+
+# regex = r'([2-9][0-9]{2}|\([2-9][0-9]{2}\))' \
+#         r'[ -]' \
+#         r'[2-9]{3}' \
+#         r'-' \
+#         r'[0-9]{4}'
+
+
+# 11.5.3
+
+# regex = r'((bee){1}(geek)+)+'
+
+
+# 11.5.4
+
+# regex = r'([a-z])(\w)([A-Z])\1\2\3'
+
+
+# 11.5.5
+
+# regex = r'(ok)\1\1+'
+
+
+# 15.5.6
+
+# regex = r'(.)(.)(.)(.)(.)\4\3\2\1'
+
+
+# 11.5.7
+
+# regex = r'\b(\w*)(\w)(\w*)\2(\w*)\b'
+
+
+# 11.5.8
+
+# regex = r'(\d{2}-){3}\d{2}|\d{8}'
+
+
+# 11.5.9
+
+# regex = r'\d{2}' \
+#         r'((-)?|(---)?|(\.)?)' \
+#         r'\d{2}\1' \
+#         r'\d{2}\1' \
+#         r'\d{2}'
+
+
+# 11.5.10
+
+# regex = r'\b(\w+)\s+\1\b'
+
+
+# ТЕЛЕФОННЫЕ НОМЕРА
+
+# from sys import stdin
+# from re import search
+#
+# call_numbers = [i.strip() for i in stdin]
+# for i in call_numbers:
+#     match = search(r'(?P<country>\d{1,3})([ -])(?P<city>\d{1,3})\2(?P<number>\d{4,10})', i)
+#     if match:
+#         print(
+#             f'Код страны: {match.group("country")}, '
+#             f'Код города: {match.group("city")}, '
+#             f'Номер: {match.group("number")}'
+#         )
+
+
+# ОНЛАЙН-ШКОЛА BEEGEEK
+
+# from re import fullmatch
+#
+# pattern = r'^(_)\d+[a-zA-Z]*_?'
+# for line in open(0):
+#     check = line.strip()
+#     print(bool(fullmatch(pattern, check)))
+
+
+# ОДИНАКОВЫЕ СЛОГИ
+
+# from re import fullmatch
+#
+# pattern = r'(\w*)(.)\1\2'
+# for line in open(0):
+#     check = line.strip()
+#     result = fullmatch(pattern, check)
+#     if result:
+#         print(result.group())
+
+
+# BEEGEEK
+
+# from re import search
+#
+# bee_pattern, geek_pattern = r'.*?(bee).*?\1', r'\b(geek)\b'
+# bee_count = geek_count = 0
+# for i in open(0):
+#     check = i.strip()
+#     match_bee = search(bee_pattern, check)
+#     match_geek = search(geek_pattern, check)
+#     if match_bee:
+#         bee_count += 1
+#     if match_geek:
+#         geek_count += 1
+# print(bee_count, geek_count, sep='\n')
+
+
+# ПОПУЛЯРНОСТЬ
+#
+# from sys import stdin
+# from re import fullmatch
+#
+# pattern_3 = r'(?P<three>^beegeek.*beegeek$)|(?P<two>.*beegeek|beegeek.*)|(?P<one>.*beegeek.*)'
+#
+# points = 0
+# for i in stdin:
+#     check = i.strip('\n')
+#     match = fullmatch(pattern_3, check)
+#     if match:
+#         if match.group('three'):
+#             points += 3
+#         elif match.group('two'):
+#             points += 2
+#         elif match.group('one'):
+#             points += 1
+# print(points)
+# OR
+# import sys, re
+#
+# patt_lst, cnt = [r'^beegeek.*beegeek$', r'^beegeek$', r'^beegeek|beegeek$', r'beegeek'], 0
+# for s in sys.stdin:
+#     for i, patt in zip((3, 2, 2, 1), patt_lst):
+#         if re.search(patt, s):
+#             cnt += i
+#             break
+# print(cnt)
+
+
+# УВАЖЕНИЕ
+
+# from re import match, I
+#
+# txt = input()
+# pattern = r'Здравствуйте|Доброе утро|Добрый день|Добрый вечер'
+# print(bool(match(pattern, txt, I)))
+
+
+# СОЦИАЛЬНЫЕ СЕТИ
+
+# from re import search, I, M
+#
+# pattern = r'beegeek'
+# counts = 0
+# for i in open(0):
+#     if search(pattern, i, I | M):
+#         counts += 1
+# print(counts)
+
+
+# 11.7.1
+
+# from re import findall, I, M
+#
+# article = '''Stepik (до августа 2016 года Stepic) — это образовательная платформа и конструктор онлайн-курсов!
+#
+# Первые образовательные материалы были выпущены на Stepik 3 сентября 2013 года.
+# В январе 2016 года Stepik выпустил мобильные приложения под iOS и Android. В 2017 году разработаны мобильные приложения для изучения ПДД в адаптивном режиме для iOS и Android...
+#
+# На октябрь 2020 года на платформе зарегистрировано 5 миллионов пользователей!
+# Stepik позволяет любому зарегистрированному пользователю создавать интерактивные обучающие уроки и онлайн-курсы, используя видео, тексты и разнообразные задачи с автоматической проверкой и моментальной обратной связью.
+#
+# Проект сотрудничает как с образовательными учреждениями, так и c индивидуальными преподавателями и авторами.
+# Stepik сегодня предлагает онлайн-курсы от образовательных организаций, а также индивидуальных авторов!
+#
+# Система автоматизированной проверки задач Stepik была использована в ряде курсов на платформе Coursera, включая курсы по биоинформатике от Калифорнийского университета в Сан-Диего и курс по анализу данных от НИУ «Высшая школа экономики»...
+#
+# Stepik также может функционировать как площадка для проведения конкурсов и олимпиад, среди проведённых мероприятий — отборочный этап Олимпиады НТИ (2016—2020) (всероссийской инженерной олимпиады школьников, в рамках программы Национальная технологическая инициатива), онлайн-этап акции Тотальный диктант в 2017 году, соревнования по информационной безопасности StepCTF-2015...'''
+#
+# start = findall(r'^stepik', article, I | M)
+# finish = findall(r'\.\.\.$|!$', article, M)
+# print(len(start))
+# print(len(finish))
+
+
+# ПОДСЛОВА
+
+# from re import findall
+#
+# txt, check = input(), input()
+# match = findall(fr'\B{check}\B', txt)
+#
+# print(len(match))
+
+
+# СЛОВА
+
+# from re import findall
+#
+# txt, check = input(), input()
+# match = findall(fr'\b{check}\b', txt)
+# print(len(match))
+
+
+# ОДИНАКОВЫЕ И РАЗНЫЕ 🍕
+
+# from re import findall, I
+#
+# word, txt = input(), input()
+# match = findall(fr'\b{word[:-2]}[sz]e\b', txt, I)
+# print(len(match))
+
+
+# ОДИНАКОВЫЕ И РАЗНЫЕ ☕
+
+# from re import findall, I
+#
+# word, txt = input(), input()
+#
+# match = findall(fr'\b{word[:-2]}[u]?r\b', txt, I)
+# print(len(match))
+
+
+# ФУНКЦИЯ abbreviate()
+
+# from re import findall
+#
+#
+# def abbreviate(txt):
+#     match = findall(r'\b[a-zA-Z]|[A-Z]+|\B[A-Z]\B', txt)
+#     return ''.join(match).upper()
+#
+#
+# print(abbreviate('javaScript object notation'))
+
+
+# HTML 🌶️
+
+# from re import findall
+#
+# for i in open(0):
+#     match = findall(r'<a href="(.+)">(.+)</a>', i)
+#     if match:
+#         print(f'{match[0][0]}, {match[0][1]}')
+# OR
+# import sys
+# import re
+#
+# text = sys.stdin.read()
+# pattern = r'<a href="(.+)">(.+)</a>'
+#
+# for address, pointer in re.findall(pattern, text):
+#     print(f'{address}, {pointer}')
+
+
+# HTML 🌶️🌶️
+
+# from re import findall
+#
+# result = {}
+# for i in open(0):
+#     match_with_out_attr = findall(r'<(\w+)>', i)
+#     match_with_attr = findall(r'(\w+)? ([\w-]+)=\"', i)
+#     if match_with_out_attr:
+#         for i in match_with_out_attr:
+#             result.setdefault(i, set())
+#     name = None
+#     if match_with_attr:
+#         for i in match_with_attr:
+#             if i[0]:
+#                 name = i[0]
+#             result.setdefault(name, set()).add(i[1])
+# for k in sorted(result):
+#     print(f'{k}: {", ".join(sorted(result[k]))}')
+# OR
+# res = {}
+# for line in open(0):
+#     for tag, params in re.findall(r'<(\w+)(.*?)>', line):
+#         res.setdefault(tag, set()).update(re.findall(r'([\w-]+)=', params))
+#
+# for key in sorted(res):
+#     print(f'{key}: {", ".join(sorted(res[key]))}')
+
+
+# ФУНКЦИЯ normalize_jpeg()
+
+# from re import sub
+#
+#
+# def normalize_jpeg(filename):
+#     return sub(r'\.(\w+)\b', '.jpg', filename)
+#
+#
+# print(normalize_jpeg('stepik.jPeG'))
+
+
+# ФУНКЦИЯ normalize_whitespace()
+
+# from re import sub
+# def normalize_whitespace(txt):
+#     return sub(r'\s{2,}', r' ', txt)
+# print(normalize_whitespace('AAAA                A                AAAA'))
+
+
+# КЛЮЧЕВЫЕ СЛОВА
+
+# from re import sub, I
+# from keyword import kwlist
+#
+# txt = input()
+# pattern = '|'.join(kwlist)
+# match = sub(fr'\b({pattern})\b', r'<kw>', txt, flags=I)
+# print(match)
+
+
+# ПЕРВЫЕ БУКВЫ
+
+# from re import sub
+#
+# txt = input()
+# match = sub(r'\b(\w)(\w)', r'\g<2>\g<1>', txt)
+# print(match)
+
+
+# УМНОЖЕНИЕ СТРОК
+
+# from re import sub
+#
+#
+# def func(match_find) -> str:
+#     n, s = match_find.group(1, 2)
+#     return int(n) * s
+#
+#
+# txt = input()
+# while '(' in txt:
+#     match = sub(r'(\d+)\((\w+)\)', func, txt)
+#     txt = match
+# print(txt)
+
+
+# ПОВТОРЯЮЩИЕСЯ СЛОВА 🌶️
+
+# from re import sub
+#
+# txt = input()
+# res = sub(r'\b(\w+)(\W+\1\b)+', lambda x: x[1], txt)
+# print(res)
+
+
+# КОММЕНТАРИИ
+
+# from sys import stdin
+# from re import sub, MULTILINE, DOTALL
+#
+# txt = stdin.read()
+# res = sub(
+#     r' *?""".*?""".*?\n| {2}#.*?$| *#.*?$\n',
+#     r'',
+#     txt,
+#     flags=MULTILINE | DOTALL
+# )
+# print(res)
+
+
+# ТОЧКА С ЗАПЯТОЙ
+
+# from re import split
+#
+# txt = input()
+# print(*split(r'\s*[.,;]\s*', txt))
+
+
+# ЛОГИЧЕСКОЕ ВЫРАЖЕНИЕ
+
+# from re import split
+#
+# txt = input()
+#
+# match = split(r'\s*or\s*|\s*and\s*|\s*[|&]\s*', txt)
+# print(', '.join(match))
+# OR
+# import re
+#
+# print(*re.split(r'\s*(?:[|&]|and|or)\s*', input()), sep=', ')
+
+
+# ФУНКЦИЯ multiple_split()
+
+# from re import split, escape
+#
+#
+# def multiple_split(string: str, delimiter: list) -> list:
+#     delimiter = '|'.join(map(escape, delimiter))
+#     return split(fr'{delimiter}', string)
+#
+#
+# print(multiple_split('beegeek-python.stepik', ['.', '-']))
+
+
+# СУММА ЧИСЕЛ
+
+# from re import compile
+#
+# pos, endpos = map(int, input().split())
+# txt = input()
+#
+# regex_obj = compile(r'\d+')
+# print(sum(map(int, (regex_obj.findall(txt, pos=pos, endpos=endpos)))))
